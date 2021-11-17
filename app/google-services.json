@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "436286191260",
+    "project_id": "rentaride-aa3ac",
+    "storage_bucket": "rentaride-aa3ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436286191260:android:3087fc32e544a7c9871f59",
+        "android_client_info": {
+          "package_name": "com.rentride.rentaride"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436286191260-8311ma9hgrub1ktp1c32uun753fcf6sc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVRZRGL_5V-CDiwnZkf0n4HqKBocsedWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436286191260-8311ma9hgrub1ktp1c32uun753fcf6sc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

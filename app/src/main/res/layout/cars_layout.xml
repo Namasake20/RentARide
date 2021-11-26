@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="15dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginTop="20dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/carImg"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:layout_margin="5dp"
+            android:padding="4dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/carNm"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_below="@+id/carImg"
+            android:textColor="@color/purple_700"
+            android:text="Mercedes Benz"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_below="@+id/carNm"
+            android:id="@+id/carDescrp"
+            android:textColor="@color/purple_700"
+            android:padding="3dp"
+            android:text="Mercedes benz eclass"
+            android:textSize="18sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_below="@+id/carDescrp"
+            android:id="@+id/carCharges"
+            android:textColor="@android:color/holo_red_dark"
+            android:padding="3dp"
+            android:text="$1000/hour"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="3dp"
+            />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

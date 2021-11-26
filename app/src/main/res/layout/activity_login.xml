@@ -108,7 +108,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#277D78"
-                android:layout_marginStart="70dp"
+                android:layout_marginStart="50dp"
                 />
 
         </LinearLayout>

@@ -34,9 +34,8 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     TextInputLayout phoneEdt,passEdt;
-//    EditText phoneEdt,passEdt;
     CheckBox rememberMe;
-    TextView LoginSignUp;
+    TextView LoginSignUp,ForgotPass;
     Button login;
     String parentDBName = "Users";
 
@@ -51,6 +50,7 @@ public class Login extends AppCompatActivity {
         phoneEdt = findViewById(R.id.phoneLogin);
         passEdt = findViewById(R.id.password);
         rememberMe = findViewById(R.id.RememberMe);
+        ForgotPass = findViewById(R.id.forgotPassword);
         Paper.init(this);
 
 
@@ -62,13 +62,14 @@ public class Login extends AppCompatActivity {
 
             }
         });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginUser();
             }
         });
-        //Incase a user clicked rRemember Me checkbox
+        //In case a user clicked RememberMe checkbox
         String phoneKey = Paper.book().read(Prevalent.UserPhoneKey);
         String passwordKey = Paper.book().read(Prevalent.UserPasswordKey);
 
@@ -78,6 +79,14 @@ public class Login extends AppCompatActivity {
             }
 
         }
+        login.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                login.setText("Admin Login");
+                LoginAdmin();
+                return true;
+            }
+        });
 
     }
 
@@ -155,6 +164,60 @@ public class Login extends AppCompatActivity {
             VerifyData(phone,password);
         }
     }
+    private void LoginAdmin(){
+        String phone = phoneEdt.getEditText().getText().toString();
+        String password = passEdt.getEditText().getText().toString();
+
+        if (!validatePhone() | !validatePassword()){
+            return;
+
+        }else {
+            VerifyAdminData(phone,password);
+        }
+
+    }
+
+    private void VerifyAdminData(String phone, String password) {
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child("Admins").child(phone).exists()){
+                    Users userData = snapshot.child("Admins").child(phone).getValue(Users.class);
+
+                    if (userData.getPhone().equals(phone)){
+                        if (userData.getPassword().equals(password)){
+                            Toast.makeText(Login.this, "Admin Login successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Login.this,AdminPanel.class);
+//                            Prevalent.CurrentOnlineUser = userData;
+                            startActivity(intent);
+
+                        }
+                        else {
+//                            Toast.makeText(Login.this, "Incorrect Password.Try Again", Toast.LENGTH_SHORT).show();
+                            passEdt.setError("Incorrect password.");
+                        }
+
+                    }
+
+                }
+                else {
+//                    Toast.makeText(Login.this, "Account with phone number "+ phone + "Unavailable.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(Login.this, "Create New Account.", Toast.LENGTH_SHORT).show();
+                    passEdt.setError("This user does not exist.");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
 
     private void VerifyData(String phone, String password) {
         if (rememberMe.isChecked()){
@@ -174,12 +237,11 @@ public class Login extends AppCompatActivity {
                         if (userData.getPassword().equals(password)){
                             Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Login.this,Home.class);
-//                            Prevalent.CurrentOnlineUser = userData;
+                            Prevalent.CurrentOnlineUser = userData;
                             startActivity(intent);
 
                         }
                         else {
-//                            Toast.makeText(Login.this, "Incorrect Password.Try Again", Toast.LENGTH_SHORT).show();
                             passEdt.setError("Incorrect password.");
                         }
 
@@ -187,8 +249,6 @@ public class Login extends AppCompatActivity {
 
                 }
                 else {
-//                    Toast.makeText(Login.this, "Account with phone number "+ phone + "Unavailable.", Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(Login.this, "Create New Account.", Toast.LENGTH_SHORT).show();
                     passEdt.setError("This user does not exist.");
                 }
 

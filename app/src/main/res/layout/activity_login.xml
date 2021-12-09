@@ -113,26 +113,11 @@
 
         </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Lgoogle"
-            android:text="Continue With Google"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold"
-            android:padding="5dp"
-            android:textSize="18sp"
-            android:background="@drawable/btn_back"
-            android:textAllCaps="false"
-            android:layout_marginTop="10dp"
-
-            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"

@@ -1,12 +1,12 @@
 package com.rentride.rentaride;
 
 public class Cars {
-    public String name,description,price,img,pid,date,time;
+    public String name,description,price,img,pid,date,time,agentPhone,agentUsername;
 
     public Cars() {
     }
 
-    public Cars(String name, String description, String price, String img, String pid, String date, String time) {
+    public Cars(String name, String description, String price, String img, String pid, String date, String time, String agentPhone, String agentUsername) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -14,6 +14,8 @@ public class Cars {
         this.pid = pid;
         this.date = date;
         this.time = time;
+        this.agentPhone = agentPhone;
+        this.agentUsername = agentUsername;
     }
 
     public String getName() {
@@ -70,5 +72,21 @@ public class Cars {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getAgentPhone() {
+        return agentPhone;
+    }
+
+    public void setAgentPhone(String agentPhone) {
+        this.agentPhone = agentPhone;
+    }
+
+    public String getAgentUsername() {
+        return agentUsername;
+    }
+
+    public void setAgentUsername(String agentUsername) {
+        this.agentUsername = agentUsername;
     }
 }

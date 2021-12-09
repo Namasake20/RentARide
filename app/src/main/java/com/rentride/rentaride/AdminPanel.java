@@ -29,12 +29,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class AdminPanel extends AppCompatActivity {
-    TextInputLayout CarName,carDescription,carCharge;
+    TextInputLayout CarName,carDescription,carCharge,AgentPhone,agentUsername;
     Button AddCar;
-    ImageView carImage;
-    Uri imageUri;
-    String nameCar,DescCar,chargeCar,saveDate,saveTime;
+    ImageView carImage,profilePic;
+    Uri imageUri,profileUri;
+    String nameCar,DescCar,chargeCar,saveDate,saveTime,PhoneAgent,UserName;
     private static final int galleryPick = 1;
+    private static final int profilePick = 1;
     private String productRandomKey,downloadImageUrl;
     private StorageReference productImageRef;
     private DatabaseReference productsRef;
@@ -53,11 +54,20 @@ public class AdminPanel extends AppCompatActivity {
         carCharge = findViewById(R.id.CarFee);
         AddCar = findViewById(R.id.addCar);
         carImage = findViewById(R.id.carImage);
+        profilePic = findViewById(R.id.agentImage);
+        AgentPhone = findViewById(R.id.AgentPhone);
+        agentUsername = findViewById(R.id.agentUsername);
 
         carImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openGallery();
+            }
+        });
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openProfileImage();
             }
         });
         AddCar.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +78,15 @@ public class AdminPanel extends AppCompatActivity {
         });
     }
 
+    private void openProfileImage() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent,galleryPick);
+    }
+
     private void validateData() {
-        if (!validateName() | !validateDescription() | !validatePrice() | !validateImage()){
+        if (!validateName() | !validateDescription() | !validatePrice() | !validateImage() | !validateAgentPhone() | !validateAgentUsername()){
             return;
 
         }else {
@@ -82,6 +99,8 @@ public class AdminPanel extends AppCompatActivity {
         nameCar = CarName.getEditText().getText().toString();
         DescCar = carDescription.getEditText().getText().toString();
         chargeCar = carCharge.getEditText().getText().toString();
+        PhoneAgent = AgentPhone.getEditText().getText().toString();
+        UserName = agentUsername.getEditText().getText().toString();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd,yyyy");
         saveDate = dateFormat.format(calendar.getTime());
@@ -126,6 +145,40 @@ public class AdminPanel extends AppCompatActivity {
                 });
             }
         });
+//        StorageReference profilePath = productImageRef.child(profileUri.getLastPathSegment() + productRandomKey + ".jpeg");
+//        final UploadTask uploadTask1 = filePath.putFile(profileUri);
+//        uploadTask1.addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                String message = e.toString();
+//                Toast.makeText(AdminPanel.this, message, Toast.LENGTH_SHORT).show();
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                Toast.makeText(AdminPanel.this, "Agent Image Uploaded successfully.", Toast.LENGTH_SHORT).show();
+//                Task<Uri> uriTask = uploadTask1.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+//                    @Override
+//                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+//                        if (!task.isSuccessful()){
+//                            throw task.getException();
+//                        }
+//                        downloadImageUrl = profilePath.getDownloadUrl().toString();
+//                        return profilePath.getDownloadUrl();
+//                    }
+//                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Uri> task) {
+//                        if (task.isSuccessful()){
+//                            downloadImageUrl = task.getResult().toString();
+//                            Toast.makeText(AdminPanel.this, "Profile Url obtained.", Toast.LENGTH_SHORT).show();
+//                            saveProductInfoToDatabase();
+//                        }
+//                    }
+//                });
+//
+//            }
+//        });
 
     }
 
@@ -138,6 +191,8 @@ public class AdminPanel extends AppCompatActivity {
         productMap.put("img",downloadImageUrl);
         productMap.put("price",chargeCar);
         productMap.put("name",nameCar);
+        productMap.put("agentPhone",PhoneAgent);
+        productMap.put("agentUsername",UserName);
 
         productsRef.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -171,6 +226,10 @@ public class AdminPanel extends AppCompatActivity {
             imageUri = data.getData();
             carImage.setImageURI(imageUri);
         }
+//        else if (requestCode == profilePick && requestCode == RESULT_OK && data != null){
+//            profileUri = data.getData();
+//            profilePic.setImageURI(profileUri);
+//        }
     }
     private Boolean validateImage(){
         if (imageUri == null){
@@ -220,6 +279,43 @@ public class AdminPanel extends AppCompatActivity {
             return true;
         }
     }
+    private Boolean ProfileImage(){
+        if (profileUri == null){
+            Toast.makeText(this, "Profile Image is mandatory", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else {
+            return true;
+        }
 
+    }
+    private Boolean validateAgentPhone(){
+        String phone = AgentPhone.getEditText().getText().toString();
+        if (phone.isEmpty()){
+            AgentPhone.setError("Enter agent phone number");
+            return false;
+        }
+
+        else {
+            AgentPhone.setError(null);
+            AgentPhone.setErrorEnabled(false);
+            return true;
+        }
+
+    }
+    private Boolean validateAgentUsername(){
+        String username = agentUsername.getEditText().getText().toString();
+        if (username.isEmpty()){
+            agentUsername.setError("Enter agent username");
+            return false;
+        }
+
+        else {
+            agentUsername.setError(null);
+            agentUsername.setErrorEnabled(false);
+            return true;
+        }
+
+    }
 
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardElevation="15dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Car Name"
+            android:id="@+id/carNameF"
+            android:layout_marginStart="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/purple_700"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:id="@+id/carPriceF"
+            android:layout_marginStart="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/design_default_color_error"
+            android:textStyle="bold"
+            android:layout_below="@+id/carNameF"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AgentName"
+            android:id="@+id/AgentNameF"
+            android:layout_marginStart="15dp"
+            android:textSize="15sp"
+            android:textColor="@color/purple_700"
+            android:textStyle="bold"
+            android:layout_below="@+id/carPriceF"
+            />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

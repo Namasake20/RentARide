@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private static final int SPLASH_SCREEN = 5000;
-    ImageView mImageView;
-    TextView Welcome,Rent;
+    ImageView mImageView,copyR;
+    TextView Rent;
     Animation tAnimation,bAnimation;
 
     @Override
@@ -31,12 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Hooks
         mImageView = findViewById(R.id.splash_logo);
-        Welcome = findViewById(R.id.welcome);
+        copyR = findViewById(R.id.copr);
         Rent = findViewById(R.id.rent);
 
-        Welcome.setAnimation(tAnimation);
+        mImageView.setAnimation(tAnimation);
         mImageView.startAnimation(tAnimation);
         Rent.setAnimation(bAnimation);
+        copyR.setAnimation(bAnimation);
 
         new Handler().postDelayed(new Runnable() {
             @Override

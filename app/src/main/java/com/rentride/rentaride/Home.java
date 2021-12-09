@@ -1,4 +1,4 @@
-package com.rentride.rentaride;
+ package com.rentride.rentaride;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +42,8 @@ public class Home extends AppCompatActivity
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
+//    NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class Home extends AppCompatActivity
 
         Paper.init(this);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
@@ -60,8 +63,8 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(HomeActivity.this,CartActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(Home.this,Fleet.class);
+                startActivity(intent);
             }
         });
 
@@ -80,12 +83,14 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.bringToFront();
 
         View headerView = navigationView.getHeaderView(0);
         TextView UserName = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImage = headerView.findViewById(R.id.user_profile_image);
 
         UserName.setText(Prevalent.CurrentOnlineUser.getUsername());
+        Picasso.get().load(Prevalent.CurrentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImage);
 
     }
 
@@ -102,17 +107,17 @@ public class Home extends AppCompatActivity
 
                         carAdapter.txtName.setText(cars.getName());
                         carAdapter.txtDescription.setText(cars.getDescription());
-                        carAdapter.txtPrice.setText("$"+ cars.getPrice()+"/hour");
+                        carAdapter.txtPrice.setText("Ksh."+ cars.getPrice()+"/Day");
                         Picasso.get().load(cars.getImg()).into(carAdapter.carImg);
 
-//                        productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-////                                Intent intent = new Intent(HomeActivity.this,ProductDetailsActivity.class);
-////                                intent.putExtra("pid",products.getPid());
-////                                startActivity(intent);
-//                            }
-//                        });
+                        carAdapter.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Home.this,CarDetail.class);
+                                intent.putExtra("pid",cars.getPid());
+                                startActivity(intent);
+                            }
+                        });
 
                     }
 
@@ -174,18 +179,21 @@ public class Home extends AppCompatActivity
 
         if (id == R.id.nav_cart)
         {
-            Toast.makeText(this, "cart clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Home.this,Fleet.class);
+            startActivity(intent);
 
         }
         else if (id == R.id.nav_orders)
         {
-            Toast.makeText(this, "orders clicked.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Home.this,Orders.class);
+            startActivity(intent);
 
         }
 
         else if (id == R.id.nav_settings)
         {
-            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Home.this,Profile.class);
+            startActivity(intent);
 
 
         }

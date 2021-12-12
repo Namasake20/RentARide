@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         mImageView.setAnimation(tAnimation);
         mImageView.startAnimation(tAnimation);
-        Rent.setAnimation(bAnimation);
-        copyR.setAnimation(bAnimation);
+//        Rent.setAnimation(bAnimation);
+//        copyR.setAnimation(bAnimation);
 
         new Handler().postDelayed(new Runnable() {
             @Override

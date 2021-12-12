@@ -5,23 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Register"
-    android:orientation="vertical"
-    android:background="#D0E7E1">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WELCOME TO RENTARIDE!"
+        android:text="REGISTER"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"
-        android:gravity="center"/>
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/car"
-        android:layout_gravity="center"/>
+        android:gravity="center_horizontal"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,24 +44,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:drawableLeft="@drawable/ic_passenger"
                 />
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/phonenumber"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Phone Number">
-            <com.google.android.material.textfield.TextInputEditText
+            android:orientation="horizontal">
+            <com.hbb20.CountryCodePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ccp_autoDetectCountry="true"
+                android:layout_marginTop="5dp"
+                app:ccp_showFlag="true"
+                android:id="@+id/RegCountryCode"
+                app:ccp_showFullName="false"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:textStyle="bold"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginRight="20dp"
+                android:id="@+id/phonenumber"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Phone Number">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/ic_call_edt"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -82,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:textStyle="bold"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -111,7 +126,7 @@
             android:layout_marginLeft="20dp"
             android:id="@+id/confirmpassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Confirm Password">
+            android:hint="@string/confirm_password">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,7 +154,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Already have An Account?"
+                android:text="Already have an account?"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"

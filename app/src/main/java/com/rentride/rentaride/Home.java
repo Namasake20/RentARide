@@ -59,7 +59,7 @@ public class Home extends AppCompatActivity
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +69,7 @@ public class Home extends AppCompatActivity
         });
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -106,8 +106,11 @@ public class Home extends AppCompatActivity
                     protected void onBindViewHolder(@NonNull CarAdapter carAdapter, int i, @NonNull Cars cars) {
 
                         carAdapter.txtName.setText(cars.getName());
-                        carAdapter.txtDescription.setText(cars.getDescription());
-                        carAdapter.txtPrice.setText("Ksh."+ cars.getPrice()+"/Day");
+                        carAdapter.txtPass.setText(cars.getPassengers()+" passengers");
+                        carAdapter.txtBag.setText("Air conditioning "+cars.getAc());
+                        carAdapter.txtDoor.setText(cars.getDoors()+" Doors");
+                        carAdapter.txtTrans.setText(cars.getTransmission()+" transmission");
+                        carAdapter.txtPrice.setText("$"+ cars.getPrice()+"/Day");
                         Picasso.get().load(cars.getImg()).into(carAdapter.carImg);
 
                         carAdapter.itemView.setOnClickListener(new View.OnClickListener() {
@@ -127,8 +130,7 @@ public class Home extends AppCompatActivity
 
                         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cars_layout,parent,false);
 
-                        CarAdapter holder = new CarAdapter(view);
-                        return holder;
+                        return new CarAdapter(view);
                     }
                 };
         recyclerView.setAdapter(adapter);
@@ -137,7 +139,7 @@ public class Home extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -207,7 +209,7 @@ public class Home extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -130,8 +130,8 @@ public class CarDetail extends AppCompatActivity {
 
                     assert products != null;
                     carName.setText(products.getName());
-                    carDescription.setText(products.getDescription());
-                    carPrice.setText( "Ksh."+products.getPrice()+"/Day");
+                    carDescription.setText(products.getTransmission());
+                    carPrice.setText( "$"+products.getPrice()+"/Day");
                     agentName.setText(products.getAgentUsername());
                     Picasso.get().load(products.getImg()).into(carImage);
                     number = products.getAgentPhone();

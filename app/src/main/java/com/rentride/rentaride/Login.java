@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hbb20.CountryCodePicker;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +39,7 @@ public class Login extends AppCompatActivity {
     TextView LoginSignUp,ForgotPass;
     Button login;
     String parentDBName = "Users";
+    CountryCodePicker codePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,16 @@ public class Login extends AppCompatActivity {
         passEdt = findViewById(R.id.password);
         rememberMe = findViewById(R.id.RememberMe);
         ForgotPass = findViewById(R.id.forgotPassword);
+        codePicker = findViewById(R.id.CountryPLog);
         Paper.init(this);
+
+        ForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this,ForgotPassword.class);
+                startActivity(intent);
+            }
+        });
 
 
         LoginSignUp.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +165,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void LoginUser() {
-        String phone = phoneEdt.getEditText().getText().toString();
+        String phone = "+"+codePicker.getFullNumber()+phoneEdt.getEditText().getText().toString();
         String password = passEdt.getEditText().getText().toString();
 
         if (!validatePhone() | !validatePassword()){

@@ -34,7 +34,7 @@ import java.util.HashMap;
 
 public class Profile extends AppCompatActivity {
     CircleImageView profileImageView;
-    TextInputEditText fullNameEdt,UserPhoneEdt,addressEdt;
+    EditText fullNameEdt,UserPhoneEdt,addressEdt;
     TextView profileChangeTxt,closeTxt,saveTxt;
 
     private Uri imageUri;
@@ -51,9 +51,8 @@ public class Profile extends AppCompatActivity {
         profilePicturestorageRefence = FirebaseStorage.getInstance().getReference().child("Profile Pictures");
 
         profileImageView = findViewById(R.id.settings_profile_image);
-        fullNameEdt = findViewById(R.id.settings_full_name);
-        UserPhoneEdt = findViewById(R.id.settings_phone_number);
-        addressEdt = findViewById(R.id.settings_address);
+        fullNameEdt = findViewById(R.id.nameEDT);
+        UserPhoneEdt = findViewById(R.id.PhoneEdt);
         profileChangeTxt = findViewById(R.id.profile_image_change);
         closeTxt = findViewById(R.id.close_settings_btn);
         saveTxt = findViewById(R.id.update_account_settings);
@@ -104,7 +103,7 @@ public class Profile extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void userInfoDisplay(final CircleImageView profileImageView, final TextInputEditText fullNameEdt, final TextInputEditText userPhoneEdt, TextInputEditText addressEdt) {
+    private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEdt, final EditText userPhoneEdt, EditText addressEdt) {
         DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.CurrentOnlineUser.getPhone());
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override

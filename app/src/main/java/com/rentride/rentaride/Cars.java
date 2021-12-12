@@ -1,14 +1,13 @@
 package com.rentride.rentaride;
 
 public class Cars {
-    public String name,description,price,img,pid,date,time,agentPhone,agentUsername;
+    public String name,price,img,pid,date,time,agentPhone,agentUsername,ac,doors,transmission,passengers;
 
     public Cars() {
     }
 
-    public Cars(String name, String description, String price, String img, String pid, String date, String time, String agentPhone, String agentUsername) {
+    public Cars(String name, String price, String img, String pid, String date, String time, String agentPhone, String agentUsername, String ac, String doors, String transmission, String passengers) {
         this.name = name;
-        this.description = description;
         this.price = price;
         this.img = img;
         this.pid = pid;
@@ -16,6 +15,10 @@ public class Cars {
         this.time = time;
         this.agentPhone = agentPhone;
         this.agentUsername = agentUsername;
+        this.ac = ac;
+        this.doors = doors;
+        this.transmission = transmission;
+        this.passengers = passengers;
     }
 
     public String getName() {
@@ -24,14 +27,6 @@ public class Cars {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getPrice() {
@@ -88,5 +83,37 @@ public class Cars {
 
     public void setAgentUsername(String agentUsername) {
         this.agentUsername = agentUsername;
+    }
+
+    public String getAc() {
+        return ac;
+    }
+
+    public void setAc(String ac) {
+        this.ac = ac;
+    }
+
+    public String getDoors() {
+        return doors;
+    }
+
+    public void setDoors(String doors) {
+        this.doors = doors;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
+    }
+
+    public String getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(String passengers) {
+        this.passengers = passengers;
     }
 }

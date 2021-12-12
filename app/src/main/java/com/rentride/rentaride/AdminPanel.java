@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,17 +26,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hbb20.CountryCodePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
 public class AdminPanel extends AppCompatActivity {
-    TextInputLayout CarName,carDescription,carCharge,AgentPhone,agentUsername;
+    TextInputLayout CarName,carCharge,AgentPhone,agentUsername;
+    CountryCodePicker picker;
+    String[] items = {"Manual","Automatic"};
+    String[] air = {"available","unavailable"};
+    String[] door = {"2","4","6"};
+    String[] passes = {"2","3","4","5","6"};
+    String[] bagN = {"1","2"};
+    AutoCompleteTextView Trans,carDoors,carBags,carPass,AirCon;
+    ArrayAdapter<String> adapterItems,adapterDoor,adapterPass,adapterBag,adapterAir;
     Button AddCar;
     ImageView carImage,profilePic;
     Uri imageUri,profileUri;
-    String nameCar,DescCar,chargeCar,saveDate,saveTime,PhoneAgent,UserName;
+    String nameCar,DescCar,chargeCar,saveDate,saveTime,PhoneAgent,UserName,doors,pass,bag,transm,airc;
     private static final int galleryPick = 1;
     private static final int profilePick = 1;
     private String productRandomKey,downloadImageUrl;
@@ -50,13 +62,31 @@ public class AdminPanel extends AppCompatActivity {
 
 
         CarName = findViewById(R.id.CarName);
-        carDescription = findViewById(R.id.Description);
+        carDoors = findViewById(R.id.Doors);
+        AirCon = findViewById(R.id.AirCon);
+        carBags = findViewById(R.id.bagNo);
+        carPass = findViewById(R.id.passNo);
+        Trans = findViewById(R.id.Trans);
         carCharge = findViewById(R.id.CarFee);
         AddCar = findViewById(R.id.addCar);
         carImage = findViewById(R.id.carImage);
-        profilePic = findViewById(R.id.agentImage);
+        picker = findViewById(R.id.CountryAdmin);
+//        profilePic = findViewById(R.id.agentImage);
         AgentPhone = findViewById(R.id.AgentPhone);
         agentUsername = findViewById(R.id.agentUsername);
+
+        adapterItems = new ArrayAdapter<>(this, R.layout.list_item, items);
+        Trans.setAdapter(adapterItems);
+
+        adapterDoor = new ArrayAdapter<>(this, R.layout.list_item, door);
+        carDoors.setAdapter(adapterDoor);
+        adapterAir = new ArrayAdapter<>(this, R.layout.list_item, air);
+        AirCon.setAdapter(adapterAir);
+
+        adapterPass = new ArrayAdapter<>(this, R.layout.list_item, passes);
+        carPass.setAdapter(adapterPass);
+        adapterBag = new ArrayAdapter<>(this, R.layout.list_item, bagN);
+        carBags.setAdapter(adapterBag);
 
         carImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,12 +94,12 @@ public class AdminPanel extends AppCompatActivity {
                 openGallery();
             }
         });
-        profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProfileImage();
-            }
-        });
+//        profilePic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openProfileImage();
+//            }
+//        });
         AddCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +116,7 @@ public class AdminPanel extends AppCompatActivity {
     }
 
     private void validateData() {
-        if (!validateName() | !validateDescription() | !validatePrice() | !validateImage() | !validateAgentPhone() | !validateAgentUsername()){
+        if (!validateName() | !validateDescription() | !validatePrice() | !validateImage() | !validateAgentPhone() | !validateAgentUsername() | !validateDoors() | !validatePass() | !validateAir()){
             return;
 
         }else {
@@ -97,9 +127,14 @@ public class AdminPanel extends AppCompatActivity {
 
     private void submitData() {
         nameCar = CarName.getEditText().getText().toString();
-        DescCar = carDescription.getEditText().getText().toString();
+//        DescCar = carDescription.getEditText().getText().toString();
         chargeCar = carCharge.getEditText().getText().toString();
-        PhoneAgent = AgentPhone.getEditText().getText().toString();
+        doors = carDoors.getText().toString();
+        pass = carPass.getText().toString();
+        bag = carBags.getText().toString();
+        transm = Trans.getText().toString();
+        airc = AirCon.getText().toString();
+        PhoneAgent = "+"+picker.getFullNumber()+AgentPhone.getEditText().getText().toString();
         UserName = agentUsername.getEditText().getText().toString();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd,yyyy");
@@ -191,6 +226,10 @@ public class AdminPanel extends AppCompatActivity {
         productMap.put("img",downloadImageUrl);
         productMap.put("price",chargeCar);
         productMap.put("name",nameCar);
+        productMap.put("doors",doors);
+        productMap.put("passengers",pass);
+        productMap.put("transmission",transm);
+        productMap.put("ac",airc);
         productMap.put("agentPhone",PhoneAgent);
         productMap.put("agentUsername",UserName);
 
@@ -254,15 +293,57 @@ public class AdminPanel extends AppCompatActivity {
         }
     }
     private Boolean validateDescription(){
-        String desc = carDescription.getEditText().getText().toString();
+        String desc = Trans.getText().toString();
         if (desc.isEmpty()){
-            carDescription.setError("Enter car description");
+            Trans.setError("select transmission");
+            return false;
+        }
+
+
+        else {
+            Trans.setError(null);
+//            Trans.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validateAir(){
+        String desc = AirCon.getText().toString();
+        if (desc.isEmpty()){
+            AirCon.setError("choose option");
+            return false;
+        }
+
+
+        else {
+            AirCon.setError(null);
+//            Trans.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validateDoors(){
+        String desc = carDoors.getText().toString();
+        if (desc.isEmpty()){
+            carDoors.setError("select doors");
+            return false;
+        }
+
+
+        else {
+            carDoors.setError(null);
+//            Trans.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validatePass(){
+        String desc = carPass.getText().toString();
+        if (desc.isEmpty()){
+            carPass.setError("select passengers");
             return false;
         }
 
         else {
-            carDescription.setError(null);
-            carDescription.setErrorEnabled(false);
+            carPass.setError(null);
+//            Trans.setErrorEnabled(false);
             return true;
         }
     }

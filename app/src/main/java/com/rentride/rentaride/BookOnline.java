@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.hbb20.CountryCodePicker;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -46,6 +47,7 @@ public class BookOnline extends AppCompatActivity {
     Button placeOrderBtn;
     DatePickerDialog.OnDateSetListener setListener,listener;
     int hr,min,hr1,min1;
+    CountryCodePicker picker;
     private String carName = "";
     private String carCharges = "";
 
@@ -65,6 +67,7 @@ public class BookOnline extends AppCompatActivity {
         PickTime = findViewById(R.id.Ptime);
         DropOff = findViewById(R.id.calDrop);
         DropTime = findViewById(R.id.TDrop);
+        picker = findViewById(R.id.bookCode);
 
         pickLoc = findViewById(R.id.PickupLocation);
         DropLoc = findViewById(R.id.DropoffLocation);
@@ -195,7 +198,7 @@ public class BookOnline extends AppCompatActivity {
         ordersMap.put("dtime",DropTime.getText().toString());
         ordersMap.put("plocation",pickLoc.getEditText().getText().toString());
         ordersMap.put("dlocation",DropLoc.getEditText().getText().toString());
-        ordersMap.put("phone_number",Phone.getEditText().getText().toString());
+        ordersMap.put("phone_number","+"+picker.getFullNumber()+Phone.getEditText().getText().toString());
         ordersMap.put("date",saveCurrentDate);
         ordersMap.put("time",saveCurrentTime);
         OrdersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {

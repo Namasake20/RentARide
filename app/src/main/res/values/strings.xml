@@ -8,7 +8,24 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string name="select">Transmission</string>
+    <string name="doors">Doors</string>
+    <string name="pass">Passengers</string>
+    <string name="bag">Bag</string>
+    <string name="air">AirCon</string>
+
+    <string name="otp_code">Code</string>
+    <string name="otp_text">Phone Verification</string>
+    <string name="otp_description">Enter code sent to phone Number</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="password_reset">Password reset</string>
+    <string name="enter_phone_number_to_receive_verification_code">Provide phone number to receive verification code</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="next">next</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="update">update</string>
 </resources>

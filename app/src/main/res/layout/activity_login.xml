@@ -5,18 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:orientation="vertical"
-    android:background="#D0E7E1">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WELCOME TO RENTARIDE!"
+        android:text="LOGIN"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="20dp"
-        android:gravity="center"/>
+        android:gravity="center_horizontal"/>
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -35,33 +34,49 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/phoneLogin"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Phone Number">
-            <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginLeft="20dp">
+            <com.hbb20.CountryCodePicker
+                android:layout_marginTop="3dp"
+                app:ccp_showFlag="true"
+                app:ccp_autoDetectCountry="true"
+                android:layout_width="wrap_content"
+                android:id="@+id/CountryPLog"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:textStyle="bold"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:id="@+id/phoneLogin"
+                app:boxStrokeWidthFocused="2dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Phone Number">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/ic_call_edt"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:passwordToggleEnabled="true"
             android:layout_marginRight="20dp"
+            app:boxStrokeWidthFocused="2dp"
             android:layout_marginLeft="20dp"
             android:id="@+id/password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Password">
+            android:hint="@string/password">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,32 +85,18 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Login"
-            android:id="@+id/login"
-            android:textStyle="bold"
-            android:padding="10dp"
-            android:textSize="18sp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            />
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Remember Me"
                 android:id="@+id/RememberMe"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#277D78"
                 />
@@ -105,24 +106,36 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/forgotPassword"
                 android:text="Forgot password?"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#277D78"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="75dp"
                 />
 
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:text="Login"
+            android:id="@+id/login"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="20dp"
-            android:gravity="center">
+            android:gravity="center_horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Don't have An Account?"
+                android:text="Don't have an account?"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"

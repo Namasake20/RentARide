@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hbb20.CountryCodePicker;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class Register extends AppCompatActivity {
     TextInputLayout emailEdt,Username,passwordEdt,confirm_password,PhoneNumber;
 //    EditText Username,passwordEdt,confirm_password,PhoneNumber;
     TextView SignUpLogin;
+    CountryCodePicker countryCodePicker;
     Button register;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
@@ -50,6 +52,7 @@ public class Register extends AppCompatActivity {
         register = findViewById(R.id.register);
         Username = findViewById(R.id.username);
         emailEdt = findViewById(R.id.email);
+        countryCodePicker = findViewById(R.id.RegCountryCode);
         passwordEdt = findViewById(R.id.password);
         PhoneNumber = findViewById(R.id.phonenumber);
         confirm_password = findViewById(R.id.confirmpassword);
@@ -162,20 +165,19 @@ public class Register extends AppCompatActivity {
     private void CreateAccount() {
         String username = Username.getEditText().getText().toString();
         String email = emailEdt.getEditText().getText().toString();
-        String Phone = PhoneNumber.getEditText().getText().toString();
+        String Phone = "+"+countryCodePicker.getFullNumber()+PhoneNumber.getEditText().getText().toString();
         String password = passwordEdt.getEditText().getText().toString();
-        String confirmPassword = confirm_password.getEditText().getText().toString();
 
         if (!validateUsername() | !validateEmail()| !validatePhone() | !validatePassword() | !validateConfirmPass()){
             return;
 
         }
         else {
-            ValidateData(username,email,password,confirmPassword,Phone);
+            ValidateData(username,email,password,Phone);
         }
     }
 
-    private void ValidateData(String username, String email, String password, String confirmPassword, String phone) {
+    private void ValidateData(String username, String email, String password,  String phone) {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -192,8 +194,10 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
-                                Toast.makeText(Register.this, "Account Created Successfully.", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(Register.this, "Account Created Successfully.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Register.this,Login.class);
+                                //TODO submit username,email,password and phone to VerificationOTP for verification before submission to db
+//                                intent.putExtra("phone_number",phone);
                                 startActivity(intent);
                             }
                             else {
@@ -204,7 +208,7 @@ public class Register extends AppCompatActivity {
 
                 }
                 else {
-                    Toast.makeText(Register.this, "This "+ phone + " number already exists!", Toast.LENGTH_SHORT).show();
+                    PhoneNumber.setError(phone+" already exists.");
                 }
             }
 

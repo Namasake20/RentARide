@@ -6,6 +6,7 @@ import okio.Timeout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,7 +21,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class VerificationOTP extends AppCompatActivity {
@@ -28,6 +36,7 @@ public class VerificationOTP extends AppCompatActivity {
     PinView pinView;
     String generatedCode;
     MaterialButton btnCode;
+    String action,phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,10 @@ public class VerificationOTP extends AppCompatActivity {
         btnCode = findViewById(R.id.VerifyID);
 
         String phone = getIntent().getStringExtra("phone_number");
+
+        action = getIntent().getStringExtra("Action");
+        phoneNumber = getIntent().getStringExtra("phone_number");
+
 
         btnCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +66,7 @@ public class VerificationOTP extends AppCompatActivity {
     }
 
     private void submitCode(String phone) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(phone,60, TimeUnit.SECONDS, VerificationOTP.this,mCallBacks);
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(phone,60, TimeUnit.SECONDS, this,mCallBacks);
     }
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
@@ -75,7 +88,9 @@ public class VerificationOTP extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(VerificationOTP.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(VerificationOTP.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            System.out.println(e.getMessage());
+            Log.d(e.getMessage(),"Error");
 
         }
     };
@@ -92,7 +107,54 @@ public class VerificationOTP extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     //TODO submit registration data
-                    Toast.makeText(VerificationOTP.this, "Verification complete", Toast.LENGTH_SHORT).show();
+                    if (action.equals("updatePass")){
+                        updatePassword();
+                    }
+                    //TODO create another activity for update password ->returns null pointer exception
+                    else {
+                        String phoneNo = getIntent().getStringExtra("phone_number");
+                        String mail = getIntent().getStringExtra("mail");
+                        String name = getIntent().getStringExtra("username");
+                        String pass = getIntent().getStringExtra("password");
+                        final DatabaseReference RootRef;
+                        RootRef = FirebaseDatabase.getInstance().getReference();
+                        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!(snapshot.child("Users").child(phoneNo).exists())){
+                                    HashMap<String,Object> userDataMap = new HashMap<>();
+                                    userDataMap.put("phone",phoneNo);
+                                    userDataMap.put("email",mail);
+                                    userDataMap.put("password",pass);
+                                    userDataMap.put("username",name);
+
+                                    RootRef.child("Users").child(phoneNo).updateChildren(userDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                Intent intent = new Intent(VerificationOTP.this,Login.class);
+                                                startActivity(intent);
+                                            }
+                                            else {
+                                                Toast.makeText(VerificationOTP.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+
+                                }
+                                else {
+//                    PhoneNumber.setError(phone+" already exists.");
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+//                    Toast.makeText(VerificationOTP.this, "Verification complete", Toast.LENGTH_SHORT).show();
+
+                    }
 
                 }
                 else {
@@ -103,5 +165,12 @@ public class VerificationOTP extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void updatePassword() {
+        Intent intent = new Intent(VerificationOTP.this,ResetPassword.class);
+        intent.putExtra("phone_number",phoneNumber);
+        startActivity(intent);
+        finish();
     }
 }

@@ -22,8 +22,6 @@ public class ForgotPassword extends AppCompatActivity {
     MaterialButton Next;
     CountryCodePicker codePicker;
 
-    String full_number = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +34,6 @@ public class ForgotPassword extends AppCompatActivity {
         Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneN = phoneNumber.getEditText().getText().toString();
-                full_number = "+"+codePicker + phoneN;
                 VerifyPhoneData();
             }
         });
@@ -54,8 +50,9 @@ public class ForgotPassword extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.child("Users").child(phone).exists()){
-                        Intent intent = new Intent(ForgotPassword.this,ResetPassword.class);
+                        Intent intent = new Intent(ForgotPassword.this,VerificationOTP.class);
                         intent.putExtra("phone_number",phone);
+                        intent.putExtra("Action","updatePass");
                         startActivity(intent);
                         phoneNumber.setError(null);
                         phoneNumber.setErrorEnabled(false);

@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_baseline_call_24"
-                android:layout_marginStart="80dp"
+                android:layout_marginStart="60dp"
                 android:id="@+id/makeCall"/>
 
         </LinearLayout>

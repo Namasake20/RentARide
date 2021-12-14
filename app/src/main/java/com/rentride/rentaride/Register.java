@@ -184,27 +184,12 @@ public class Register extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!(snapshot.child("Users").child(phone).exists())){
-                    HashMap<String,Object> userDataMap = new HashMap<>();
-                    userDataMap.put("phone",phone);
-                    userDataMap.put("email",email);
-                    userDataMap.put("password",password);
-                    userDataMap.put("username",username);
-
-                    RootRef.child("Users").child(phone).updateChildren(userDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-//                                Toast.makeText(Register.this, "Account Created Successfully.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(Register.this,Login.class);
-                                //TODO submit username,email,password and phone to VerificationOTP for verification before submission to db
-//                                intent.putExtra("phone_number",phone);
-                                startActivity(intent);
-                            }
-                            else {
-                                Toast.makeText(Register.this, "Something wrong", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                    Intent intent = new Intent(Register.this,VerificationOTP.class);
+                    intent.putExtra("phone_number",phone);
+                    intent.putExtra("mail",email);
+                    intent.putExtra("password",password);
+                    intent.putExtra("name",username);
+                    startActivity(intent);
 
                 }
                 else {

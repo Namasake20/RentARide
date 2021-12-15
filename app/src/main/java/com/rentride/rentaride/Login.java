@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.hbb20.CountryCodePicker;
 
 import java.util.HashMap;
@@ -144,7 +145,13 @@ public class Login extends AppCompatActivity {
         if (sim.isEmpty()){
             phoneEdt.setError("Enter phone number");
             return false;
-        }else {
+
+        }
+        else if (sim.charAt(0) == '0'){
+            phoneEdt.setError("Invalid format,omit zero.");
+            return false;
+        }
+        else {
             phoneEdt.setError(null);
             phoneEdt.setErrorEnabled(false);
             return true;
@@ -243,12 +250,12 @@ public class Login extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(parentDBName).child(phone).exists()){
                     Users userData = snapshot.child(parentDBName).child(phone).getValue(Users.class);
-
                     if (userData.getPhone().equals(phone)){
                         if (userData.getPassword().equals(password)){
                             Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Login.this,Home.class);
                             Prevalent.CurrentOnlineUser = userData;
+
                             startActivity(intent);
 
                         }

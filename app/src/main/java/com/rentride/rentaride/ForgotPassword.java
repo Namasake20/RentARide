@@ -78,7 +78,12 @@ public class ForgotPassword extends AppCompatActivity {
         if (sim.isEmpty()){
             phoneNumber.setError("Enter phone number");
             return false;
-        }else {
+        }
+        else if (sim.charAt(0) == '0'){
+            phoneNumber.setError("Invalid format,omit 0");
+            return false;
+        }
+        else {
             phoneNumber.setError(null);
             phoneNumber.setErrorEnabled(false);
             return true;

@@ -111,49 +111,8 @@ public class VerificationOTP extends AppCompatActivity {
                         updatePassword();
                     }
                     //TODO create another activity for update password ->returns null pointer exception
-                    else {
-                        String phoneNo = getIntent().getStringExtra("phone_number");
-                        String mail = getIntent().getStringExtra("mail");
-                        String name = getIntent().getStringExtra("username");
-                        String pass = getIntent().getStringExtra("password");
-                        final DatabaseReference RootRef;
-                        RootRef = FirebaseDatabase.getInstance().getReference();
-                        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (!(snapshot.child("Users").child(phoneNo).exists())){
-                                    HashMap<String,Object> userDataMap = new HashMap<>();
-                                    userDataMap.put("phone",phoneNo);
-                                    userDataMap.put("email",mail);
-                                    userDataMap.put("password",pass);
-                                    userDataMap.put("username",name);
-
-                                    RootRef.child("Users").child(phoneNo).updateChildren(userDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                Intent intent = new Intent(VerificationOTP.this,Login.class);
-                                                startActivity(intent);
-                                            }
-                                            else {
-                                                Toast.makeText(VerificationOTP.this, "Something wrong", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-
-                                }
-                                else {
-//                    PhoneNumber.setError(phone+" already exists.");
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-//                    Toast.makeText(VerificationOTP.this, "Verification complete", Toast.LENGTH_SHORT).show();
-
+                    else if (action.equals("register")){
+                    storeNewUserData();
                     }
 
                 }
@@ -172,5 +131,42 @@ public class VerificationOTP extends AppCompatActivity {
         intent.putExtra("phone_number",phoneNumber);
         startActivity(intent);
         finish();
+    }
+    public void storeNewUserData(){
+        String phoneNo = getIntent().getStringExtra("phone_number");
+        String mail = getIntent().getStringExtra("mail");
+        String name = getIntent().getStringExtra("name");
+        String pass = getIntent().getStringExtra("password");
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String,Object> userDataMap = new HashMap<>();
+                userDataMap.put("phone",phoneNo);
+                userDataMap.put("email",mail);
+                userDataMap.put("password",pass);
+                userDataMap.put("username",name);
+
+                RootRef.child("Users").child(phoneNo).updateChildren(userDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Intent intent = new Intent(VerificationOTP.this,Login.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(VerificationOTP.this, "Something wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

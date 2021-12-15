@@ -115,7 +115,12 @@ public class Register extends AppCompatActivity {
         if (sim.isEmpty()){
             PhoneNumber.setError("Enter phone number");
             return false;
-        }else {
+        }
+        else if (sim.charAt(0) == '0'){
+            passwordEdt.setError("Invalid format,omit 0");
+            return false;
+        }
+        else {
             PhoneNumber.setError(null);
             PhoneNumber.setErrorEnabled(false);
             return true;
@@ -189,6 +194,7 @@ public class Register extends AppCompatActivity {
                     intent.putExtra("mail",email);
                     intent.putExtra("password",password);
                     intent.putExtra("name",username);
+                    intent.putExtra("Action","register");
                     startActivity(intent);
 
                 }

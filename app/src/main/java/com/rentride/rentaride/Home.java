@@ -210,6 +210,12 @@ public class Home extends AppCompatActivity
             finish();
 
         }
+        else if (id == R.id.helpc){
+            startActivity(new Intent(Home.this,HelpCenter.class));
+        }
+        else  if (id == R.id.Dinfo){
+            startActivity(new Intent(Home.this,About.class));
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

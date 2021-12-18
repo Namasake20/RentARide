@@ -208,7 +208,8 @@ public class BookOnline extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference()
                             .child("Book List")
                             .child("User View")
-                            .child(Prevalent.CurrentOnlineUser.getPhone()).removeValue()
+                            .child(Prevalent.CurrentOnlineUser.getPhone())
+                            .removeValue()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -260,7 +261,5 @@ public class BookOnline extends AppCompatActivity {
             return true;
         }
     }
-
-
 
 }

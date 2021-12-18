@@ -135,14 +135,14 @@ public class CarDetail extends AppCompatActivity {
                     agentName.setText(products.getAgentUsername());
                     Picasso.get().load(products.getImg()).into(carImage);
                     number = products.getAgentPhone();
-                    makeCall.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent callIntent = new Intent(Intent.ACTION_CALL);
-                            callIntent.setData(Uri.parse("tel:"+number));
-                            startActivity(callIntent);
-                        }
-                    });
+//                    makeCall.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+//                            callIntent.setData(Uri.parse("tel:"+number));
+//                            startActivity(callIntent);
+//                        }
+//                    });
 
                     textMsg.setOnClickListener(new View.OnClickListener() {
                         @Override

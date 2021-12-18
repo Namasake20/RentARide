@@ -17,8 +17,8 @@
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal"/>
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:src="@drawable/profile"
         android:layout_gravity="center"
         android:padding="20dp"/>
@@ -26,7 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:text="Sign In to Continue"
         android:layout_marginStart="20dp"
@@ -61,7 +60,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:textStyle="bold"
                     android:drawableLeft="@drawable/ic_call_edt"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +80,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textStyle="bold"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -24,6 +24,19 @@
             android:icon="@drawable/logout"
             android:title="Logout"
             android:iconTint="@color/purple_700"/>
-
     </group>
+        <item android:title="Contact">
+            <menu>
+                <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/helpc"
+                    android:title="Help"
+                    android:icon="@drawable/help"/>
+                <item
+                    android:id="@+id/Dinfo"
+                    android:title="About"
+                    android:icon="@drawable/info"/>
+                </group>
+            </menu>
+        </item>
 </menu>

@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="REGISTER"
+        android:text="@string/register"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -21,9 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:textStyle="bold"
         android:textColor="@color/black"
-        android:text="Account Details"
+        android:text="@string/account_details"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         />
@@ -43,7 +42,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_passenger"
+                android:drawableStart="@drawable/ic_passenger"
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
@@ -66,7 +65,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:id="@+id/phonenumber"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Phone Number">
@@ -74,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:drawableLeft="@drawable/ic_call_edt"
+                    android:drawableStart="@drawable/ic_call_edt"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,12 +128,33 @@
                 android:inputType="textPassword"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TermsC"
+                android:textColor="@color/black"
+                android:text="@string/read_and_agree_to"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hyperlink"
+                android:id="@+id/TxtTerms"
+                android:textColor="@color/black"
+                android:layout_marginStart="2dp"/>
+
+        </LinearLayout>
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
             android:text="create Account"
             android:id="@+id/register"
             android:textStyle="bold"
@@ -149,7 +169,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Already have an account?"
+                android:text="@string/already_have_an_account"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
@@ -158,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/SignUpLogin"
-                android:text="SignIn"
+                android:text="@string/signin"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginStart="2dp"

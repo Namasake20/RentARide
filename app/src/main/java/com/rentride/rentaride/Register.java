@@ -8,8 +8,10 @@ import io.paperdb.Paper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +39,9 @@ import java.util.Map;
 public class Register extends AppCompatActivity {
     TextInputLayout emailEdt,Username,passwordEdt,confirm_password,PhoneNumber;
 //    EditText Username,passwordEdt,confirm_password,PhoneNumber;
-    TextView SignUpLogin;
+    TextView SignUpLogin,TermsCon;
     CountryCodePicker countryCodePicker;
+    CheckBox checkBox;
     Button register;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
@@ -56,6 +59,10 @@ public class Register extends AppCompatActivity {
         passwordEdt = findViewById(R.id.password);
         PhoneNumber = findViewById(R.id.phonenumber);
         confirm_password = findViewById(R.id.confirmpassword);
+        TermsCon = findViewById(R.id.TxtTerms);
+        checkBox = findViewById(R.id.TermsC);
+
+        TermsCon.setMovementMethod(LinkMovementMethod.getInstance());
 
         SignUpLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +173,16 @@ public class Register extends AppCompatActivity {
 
         }
     }
+    private Boolean validateCheckbox(){
+        if (!checkBox.isChecked()){
+            checkBox.setError("Check box.");
+            return false;
+        }
+        else {
+            checkBox.setError(null);
+            return true;
+        }
+    }
 
     private void CreateAccount() {
         String username = Username.getEditText().getText().toString();
@@ -173,7 +190,7 @@ public class Register extends AppCompatActivity {
         String Phone = "+"+countryCodePicker.getFullNumber()+PhoneNumber.getEditText().getText().toString();
         String password = passwordEdt.getEditText().getText().toString();
 
-        if (!validateUsername() | !validateEmail()| !validatePhone() | !validatePassword() | !validateConfirmPass()){
+        if (!validateUsername() | !validateEmail()| !validatePhone() | !validatePassword() | !validateConfirmPass() | !validateCheckbox()){
             return;
 
         }

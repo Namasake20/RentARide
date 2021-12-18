@@ -94,12 +94,7 @@ public class AdminPanel extends AppCompatActivity {
                 openGallery();
             }
         });
-//        profilePic.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openProfileImage();
-//            }
-//        });
+
         AddCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,40 +175,6 @@ public class AdminPanel extends AppCompatActivity {
                 });
             }
         });
-//        StorageReference profilePath = productImageRef.child(profileUri.getLastPathSegment() + productRandomKey + ".jpeg");
-//        final UploadTask uploadTask1 = filePath.putFile(profileUri);
-//        uploadTask1.addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                String message = e.toString();
-//                Toast.makeText(AdminPanel.this, message, Toast.LENGTH_SHORT).show();
-//            }
-//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Toast.makeText(AdminPanel.this, "Agent Image Uploaded successfully.", Toast.LENGTH_SHORT).show();
-//                Task<Uri> uriTask = uploadTask1.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-//                    @Override
-//                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-//                        if (!task.isSuccessful()){
-//                            throw task.getException();
-//                        }
-//                        downloadImageUrl = profilePath.getDownloadUrl().toString();
-//                        return profilePath.getDownloadUrl();
-//                    }
-//                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Uri> task) {
-//                        if (task.isSuccessful()){
-//                            downloadImageUrl = task.getResult().toString();
-//                            Toast.makeText(AdminPanel.this, "Profile Url obtained.", Toast.LENGTH_SHORT).show();
-//                            saveProductInfoToDatabase();
-//                        }
-//                    }
-//                });
-//
-//            }
-//        });
 
     }
 
@@ -265,14 +226,11 @@ public class AdminPanel extends AppCompatActivity {
             imageUri = data.getData();
             carImage.setImageURI(imageUri);
         }
-//        else if (requestCode == profilePick && requestCode == RESULT_OK && data != null){
-//            profileUri = data.getData();
-//            profilePic.setImageURI(profileUri);
-//        }
     }
     private Boolean validateImage(){
         if (imageUri == null){
             Toast.makeText(this, "Image is mandatory.", Toast.LENGTH_SHORT).show();
+            System.out.println("Error.");
             return false;
         }
         else {
@@ -371,7 +329,7 @@ public class AdminPanel extends AppCompatActivity {
 
     }
     private Boolean validateAgentPhone(){
-        String phone = AgentPhone.getEditText().getText().toString();
+        String phone = "+"+picker+ AgentPhone.getEditText().getText().toString();
         if (phone.isEmpty()){
             AgentPhone.setError("Enter agent phone number");
             return false;

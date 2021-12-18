@@ -28,4 +28,14 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="update">update</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="read_and_agree_to">Read and agree to</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="hyperlink"><a href="https://pages.flycricket.io/rentaride/terms.html">Terms and Conditions</a></string>
+
+    <string name="signin">SignIn</string>
+    <string name="register">REGISTER</string>
+    <string name="account_details">Account Details</string>
+    <string name="how_can_we_help_you">How can we help you?</string>
+    <string name="submit">Submit</string>
 </resources>

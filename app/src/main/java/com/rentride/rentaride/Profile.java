@@ -34,7 +34,7 @@ import java.util.HashMap;
 
 public class Profile extends AppCompatActivity {
     CircleImageView profileImageView;
-    EditText fullNameEdt,UserPhoneEdt,addressEdt;
+    EditText fullNameEdt,UserPhoneEdt;
     TextView profileChangeTxt,closeTxt,saveTxt;
 
     private Uri imageUri;
@@ -85,7 +85,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        userInfoDisplay(profileImageView,fullNameEdt,UserPhoneEdt,addressEdt);
+        userInfoDisplay(profileImageView,fullNameEdt,UserPhoneEdt);
 
     }
 
@@ -103,7 +103,7 @@ public class Profile extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEdt, final EditText userPhoneEdt, EditText addressEdt) {
+    private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEdt, final EditText userPhoneEdt) {
         DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.CurrentOnlineUser.getPhone());
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -113,12 +113,10 @@ public class Profile extends AppCompatActivity {
                         String image = snapshot.child("image").getValue().toString();
                         String name = snapshot.child("name").getValue().toString();
                         String phone = snapshot.child("phone").getValue().toString();
-                        String address = snapshot.child("address").getValue().toString();
 
                         Picasso.get().load(image).into(profileImageView);
                         fullNameEdt.setText(name);
                         userPhoneEdt.setText(phone);
-                        addressEdt.setText(address);
                     }
                 }
             }
@@ -135,7 +133,6 @@ public class Profile extends AppCompatActivity {
 
         HashMap<String,Object> userMap = new HashMap<>();
         userMap.put("name",fullNameEdt.getText().toString());
-        userMap.put("address",addressEdt.getText().toString());
         userMap.put("phoneOrder",UserPhoneEdt.getText().toString());
         refs.child(Prevalent.CurrentOnlineUser.getPhone()).updateChildren(userMap);
 
@@ -148,7 +145,6 @@ public class Profile extends AppCompatActivity {
     private void userInfoSave() {
         String phone = UserPhoneEdt.getText().toString();
         String uname = fullNameEdt.getText().toString();
-        String addrs = addressEdt.getText().toString();
         ;
         if (phone.isEmpty()){
             Toast.makeText(this, "Enter phone", Toast.LENGTH_SHORT).show();
@@ -157,9 +153,7 @@ public class Profile extends AppCompatActivity {
         else if (uname.isEmpty()){
             Toast.makeText(this, "Enter username", Toast.LENGTH_SHORT).show();
         }
-        else if (addrs.isEmpty()){
-            Toast.makeText(this, "Enter address", Toast.LENGTH_SHORT).show();
-        }
+
         else if (checker.equals("clicked")){
             uploadImage();
         }
@@ -168,7 +162,7 @@ public class Profile extends AppCompatActivity {
 
     private void uploadImage() {
         if (imageUri != null){
-            final StorageReference fileRefs = profilePicturestorageRefence.child(Prevalent.CurrentOnlineUser.getPhone() + "jpg");
+            final StorageReference fileRefs = profilePicturestorageRefence.child(Prevalent.CurrentOnlineUser.getPhone() + ".jpg");
 
             uploadTask = fileRefs.putFile(imageUri);
 
@@ -191,7 +185,6 @@ public class Profile extends AppCompatActivity {
 
                         HashMap<String,Object> userMap = new HashMap<>();
                         userMap.put("name",fullNameEdt.getText().toString());
-                        userMap.put("address",addressEdt.getText().toString());
                         userMap.put("phoneOrder",UserPhoneEdt.getText().toString());
                         userMap.put("image",myUrl);
                         refs.child(Prevalent.CurrentOnlineUser.getPhone()).updateChildren(userMap);

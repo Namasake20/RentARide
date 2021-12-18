@@ -157,6 +157,19 @@ public class Login extends AppCompatActivity {
             return true;
         }
     }
+    private Boolean validatePhoneA(){
+        String sim = phoneEdt.getEditText().getText().toString();
+        if (sim.isEmpty()){
+            phoneEdt.setError("Enter phone number");
+            return false;
+
+        }
+        else {
+            phoneEdt.setError(null);
+            phoneEdt.setErrorEnabled(false);
+            return true;
+        }
+    }
     private Boolean validatePassword(){
         String pass = passEdt.getEditText().getText().toString();
         if (pass.isEmpty()){
@@ -183,29 +196,29 @@ public class Login extends AppCompatActivity {
         }
     }
     private void LoginAdmin(){
-        String phone = phoneEdt.getEditText().getText().toString();
+        String phonea = phoneEdt.getEditText().getText().toString();
         String password = passEdt.getEditText().getText().toString();
 
-        if (!validatePhone() | !validatePassword()){
+        if (!validatePhoneA() | !validatePassword()){
             return;
 
         }else {
-            VerifyAdminData(phone,password);
+            VerifyAdminData(phonea,password);
         }
 
     }
 
-    private void VerifyAdminData(String phone, String password) {
+    private void VerifyAdminData(String phonea, String password) {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
 
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child("Admins").child(phone).exists()){
-                    Users userData = snapshot.child("Admins").child(phone).getValue(Users.class);
+                if (snapshot.child("Admins").child(phonea).exists()){
+                    Users userData = snapshot.child("Admins").child(phonea).getValue(Users.class);
 
-                    if (userData.getPhone().equals(phone)){
+                    if (userData.getPhone().equals(phonea)){
                         if (userData.getPassword().equals(password)){
                             Toast.makeText(Login.this, "Admin Login successful", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Login.this,AdminPanel.class);

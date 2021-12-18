@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpCenter"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/how_can_we_help_you"
+        android:textColor="@color/purple_700"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+         />
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="50dp"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Describe your issue"
+                android:layout_margin="10dp"
+                android:textSize="18sp"
+                android:inputType="textMultiLine"
+                android:textStyle="normal"
+                android:textColor="@color/black"/>
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/submit"
+                android:textStyle="bold"
+                android:padding="10dp"/>
+
+        </LinearLayout>
+
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

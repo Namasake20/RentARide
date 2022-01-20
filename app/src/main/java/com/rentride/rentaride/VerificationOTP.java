@@ -89,8 +89,8 @@ public class VerificationOTP extends AppCompatActivity {
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
             Toast.makeText(VerificationOTP.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            System.out.println(e.getMessage());
-            Log.d(e.getMessage(),"Error");
+//            System.out.println(e.getMessage());
+//            Log.d(e.getMessage(),"Error");
 
         }
     };
@@ -106,11 +106,11 @@ public class VerificationOTP extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    //TODO submit registration data
+                    //forgot password
                     if (action.equals("updatePass")){
                         updatePassword();
                     }
-                    //TODO create another activity for update password ->returns null pointer exception
+                    //register new user
                     else if (action.equals("register")){
                     storeNewUserData();
                     }

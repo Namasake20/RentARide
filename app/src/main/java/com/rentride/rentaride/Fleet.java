@@ -69,6 +69,7 @@ public class Fleet extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int i) {
                                 if (i == 0){
+                                    //TODO add bookList.child() interface to confirm a single order of car 
                                     Intent intent = new Intent(Fleet.this,BookOnline.class);
                                     intent.putExtra("car Name",fleetModel.getPname());
                                     intent.putExtra("car Charge",fleetModel.getPrice());

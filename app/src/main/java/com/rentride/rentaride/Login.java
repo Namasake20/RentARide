@@ -114,7 +114,7 @@ public class Login extends AppCompatActivity {
 
                     if (userData.getPhone().equals(phone)){
                         if (userData.getPassword().equals(password)){
-                            Toast.makeText(Login.this, "Already logged In", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Login.this, "Already logged In", Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(Login.this,Home.class);
                             Prevalent.CurrentOnlineUser = userData;

@@ -162,7 +162,7 @@ public class Profile extends AppCompatActivity {
 
     private void uploadImage() {
         if (imageUri != null){
-            final StorageReference fileRefs = profilePicturestorageRefence.child(Prevalent.CurrentOnlineUser.getPhone() + ".jpg");
+            final StorageReference fileRefs = profilePicturestorageRefence.child(Prevalent.CurrentOnlineUser.getPhone() + ".jpeg");
 
             uploadTask = fileRefs.putFile(imageUri);
 

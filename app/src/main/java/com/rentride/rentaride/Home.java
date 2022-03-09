@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,6 @@ public class Home extends AppCompatActivity
 
 //    NavigationView navigationView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class Home extends AppCompatActivity
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Home");
+//        toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -69,7 +69,9 @@ public class Home extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
+        SessionService service = new SessionService(Home.this);
+        HashMap<String,String> userDetail =   service.getUserDetailsFromSession();
+        String userName = userDetail.get(SessionService.USERNAME);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -91,8 +93,10 @@ public class Home extends AppCompatActivity
         TextView UserName = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImage = headerView.findViewById(R.id.user_profile_image);
 
-        UserName.setText(Prevalent.CurrentOnlineUser.getUsername());
-        Picasso.get().load(Prevalent.CurrentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImage);
+        //TODO:returns a null pointer exception
+//        UserName.setText(Prevalent.CurrentOnlineUser.getUsername());
+        UserName.setText(userName);
+//        Picasso.get().load(Prevalent.CurrentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImage);
 
     }
 
@@ -155,6 +159,19 @@ public class Home extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
         return true;
     }
 

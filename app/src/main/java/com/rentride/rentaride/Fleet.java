@@ -27,7 +27,6 @@ public class Fleet extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +36,6 @@ public class Fleet extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
     }
 
     @Override
@@ -69,10 +67,13 @@ public class Fleet extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int i) {
                                 if (i == 0){
-                                    //TODO add bookList.child() interface to confirm a single order of car 
+                                    //TODO add bookList.child() interface to confirm a single order of car
+
                                     Intent intent = new Intent(Fleet.this,BookOnline.class);
                                     intent.putExtra("car Name",fleetModel.getPname());
                                     intent.putExtra("car Charge",fleetModel.getPrice());
+                                    intent.putExtra("agent",fleetModel.getAgentUsername());
+                                    intent.putExtra("id",fleetModel.getPid());
                                     startActivity(intent);
                                 }
                                 else if (i == 1){

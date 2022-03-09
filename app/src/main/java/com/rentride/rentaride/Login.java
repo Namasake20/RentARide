@@ -265,7 +265,17 @@ public class Login extends AppCompatActivity {
                     Users userData = snapshot.child(parentDBName).child(phone).getValue(Users.class);
                     if (userData.getPhone().equals(phone)){
                         if (userData.getPassword().equals(password)){
-                            Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            //getting user's data from firebase
+                            String username = snapshot.child("Users").child(phone).child("username").getValue(String.class);
+                            String sim = snapshot.child("Users").child(phone).child("phone").getValue(String.class);
+                            String pass = snapshot.child("Users").child(phone).child("password").getValue(String.class);
+                            String email = snapshot.child("Users").child(phone).child("email").getValue(String.class);
+
+                            //creating a session
+                            SessionService sessionService = new SessionService(Login.this);
+                            sessionService.createLoginSession(username,sim,pass,email);
+
                             Intent intent = new Intent(Login.this,Home.class);
                             Prevalent.CurrentOnlineUser = userData;
 

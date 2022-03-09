@@ -6,8 +6,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_cart"
-            android:icon="@drawable/car_rental"
-            android:title="Fleet"
+            android:icon="@drawable/shopping_cart"
+            android:title="Cart"
             android:iconTint="@color/purple_700" />
         <item
             android:id="@+id/nav_orders"

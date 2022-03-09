@@ -6,181 +6,206 @@
     android:layout_height="match_parent"
     tools:context=".BookOnline">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
+        android:layout_height="wrap_content"
+        app:cardElevation="15dp"
+        android:id="@+id/carIntel"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bookedcarName"
-                android:text="Car Name"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/purple_700"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rate"
-                android:gravity="left"
-                android:layout_marginStart="50dp"
-                android:text="Charges"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/design_default_color_error"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/pickD">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pick-Up "
-                android:textColor="@color/purple_700"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/calD"
-                android:hint="Pick-up Date"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:inputType="date"
-                android:layout_marginStart="25dp"
-                />
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Ptime"
-                android:hint="Pickup Time"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:inputType="date"
-                android:layout_marginStart="50dp"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/dropD">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Drop-Off"
-                android:textColor="@color/purple_700"
-                android:textStyle="bold"
-                android:textSize="15sp"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/calDrop"
-                android:hint="Drop-off Date"
-                android:inputType="date"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:layout_marginStart="25dp"
-                />
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/TDrop"
-                android:hint="Drop-off Time"
-                android:inputType="date"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:layout_marginStart="50dp"
-                />
-
-        </LinearLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/PickupLocation"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Pick-up Location"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/DropoffLocation"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Drop-off Location"
-                android:textColor="@color/black"
-                android:textSize="18sp"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <com.hbb20.CountryCodePicker
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/bookCode"
-                app:ccp_autoDetectCountry="true"
-                app:ccp_showFlag="true"
-                android:layout_marginTop="5dp"
-                app:ccp_showFullName="false"/>
-            <com.google.android.material.textfield.TextInputLayout
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/phoneOrder"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/RVDetails">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentStart="true">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="5dp"
+                        android:id="@+id/carProductImage"
+                        android:src="@drawable/car"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="150dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="car name"
+                        android:id="@+id/bookedcarName"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="manual transmission"
+                        android:id="@+id/product_details_description"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Car Price"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/rate"
+                        android:textColor="@color/design_default_color_error"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_location"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TxtLocation"
+                            android:text="Nairobi,Waiyaki Way"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="normal"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/RVBooking">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Phone Number"
-                    android:inputType="phone"
-                    android:textColor="@color/black"
-                    android:drawableStart="@drawable/ic_call_edt"
-                    android:textSize="18sp"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Driver Details"
+                        android:layout_marginStart="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_alignParentStart="true"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:id="@+id/driverNameb">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Full Name"/>
+                        </com.google.android.material.textfield.TextInputLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:id="@+id/driverMailb">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Email"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <com.hbb20.CountryCodePicker
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/countryPickerb"
+                            android:layout_alignParentStart="true"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/phoneOrderEdt">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Phone Number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_alignParentStart="true"
+                            app:startIconDrawable="@drawable/ic_calendar"
+                            android:id="@+id/startDateL">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="date"
+                                android:id="@+id/DateEdt"
+                                android:hint="From:"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            app:startIconDrawable="@drawable/ic_calendar"
+                            android:id="@+id/returnDateL">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="date"
+                                android:id="@+id/returnDateEdt"
+                                android:hint="To:"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Book Now"
+                        android:padding="13dp"
+                        android:id="@+id/bookNowBtn"
+                        android:layout_margin="20dp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="place order"
-            android:id="@+id/Order"
-            android:textStyle="bold"
-            android:padding="5dp"
-            android:textSize="18sp"
-            android:background="@drawable/btn_back"/>
-    </LinearLayout>
-
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

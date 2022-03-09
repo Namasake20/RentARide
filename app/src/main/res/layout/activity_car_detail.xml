@@ -6,63 +6,241 @@
     android:layout_height="match_parent"
     tools:context=".CarDetail">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="15dp"
+        android:id="@+id/carIntel"
         app:cardCornerRadius="10dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/RVDetails">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_alignParentStart="true">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="5dp"
+                        android:id="@+id/product_details_image"
+                        android:src="@drawable/car"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="150dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="car name"
+                        android:id="@+id/product_details_name"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="22sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="manual transmission"
+                        android:id="@+id/product_details_description"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Car Price"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/product_details_price"
+                        android:textColor="@color/design_default_color_error"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_location"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TxtLocation"
+                            android:text="Nairobi,Waiyaki Way"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="normal"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/RVBooking">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Driver Details"
+                        android:layout_marginStart="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_alignParentStart="true"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:id="@+id/driverName">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Full Name"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:id="@+id/driverMail">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Email"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <com.hbb20.CountryCodePicker
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/countryPicker"
+                            android:layout_alignParentStart="true"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_marginRight="20dp"
+                            android:id="@+id/driverPhone">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Phone Number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_alignParentStart="true"
+                            app:startIconDrawable="@drawable/ic_calendar"
+                            android:id="@+id/startDateLt">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="date"
+                                android:id="@+id/startDateEdt"
+                                android:hint="From:"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="200dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            app:startIconDrawable="@drawable/ic_calendar"
+                            android:id="@+id/dropDateL">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="date"
+                                android:id="@+id/returnDateEdt"
+                                android:hint="To:"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/book_now"
+                            android:background="@drawable/custom_btn"
+                            android:textAllCaps="false"
+                            android:padding="13dp"
+                            android:backgroundTint="@color/teal_700"
+                            android:textStyle="normal"
+                            android:textColor="@color/white"
+                            android:id="@+id/bookNow"
+                            android:layout_marginRight="20dp"/>
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/custom_btn"
+                            android:layout_alignParentStart="true"
+                            android:text="Add to Cart"
+                            android:drawableStart="@drawable/shopping_cart"
+                            android:textAllCaps="false"
+                            android:textColor="@color/teal_700"
+                            android:id="@+id/pd_add_to_cart"
+                            android:gravity="center"
+                            android:padding="13dp"
+                            android:layout_marginStart="5dp"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <ImageView
-        android:id="@+id/product_details_image"
-        android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:scaleType="centerCrop"
-        android:layout_margin="5dp"
-
-        />
-    <TextView
-        android:id="@+id/product_details_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_details_image"
-        android:text="Car Name"
-        android:textColor="@color/teal_700"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-    <TextView
-        android:id="@+id/product_details_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_details_name"
-        android:text="Car Description"
-        android:textColor="@color/teal_700"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
-    <TextView
-        android:id="@+id/product_details_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/product_details_description"
-        android:text="Car Price"
-        android:textColor="@color/design_default_color_error"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="10dp"/>
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/carAgent"
-        android:layout_below="@+id/product_details_price"
+        android:layout_below="@+id/carIntel"
         app:cardElevation="15dp"
         app:cardCornerRadius="50dp"
         android:layout_margin="10dp"
@@ -126,19 +304,6 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_back"
-        android:layout_margin="15dp"
-        android:layout_alignParentBottom="true"
-        android:text="add to fleet"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:id="@+id/pd_add_to_cart"
-        android:gravity="center"
-        android:padding="10dp"
-        />
+
 
 </RelativeLayout>

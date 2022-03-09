@@ -7,40 +7,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
     tools:showIn="@layout/app_bar_main">
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/Searcher1"
-        app:cardElevation="15dp"
-        app:cardCornerRadius="50dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="30dp">
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/EnterQuery"
-            android:hint="@string/search_rentaride"
-            android:layout_marginStart="30dp"
-            android:textColor="@color/black"
-            android:textStyle="normal"
-            android:background="@drawable/rounded_editext"
-            android:layout_marginTop="18dp"
-            android:textSize="18sp"
-            android:inputType="text"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_search_24"
-            android:layout_marginStart="350dp"
-            android:layout_marginTop="20dp"/>
-
-    </com.google.android.material.card.MaterialCardView>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/RView"
-        android:scrollbars="vertical"
-        android:layout_below="@+id/Searcher1">
+        android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
 

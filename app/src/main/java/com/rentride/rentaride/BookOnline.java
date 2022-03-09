@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -41,15 +42,16 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class BookOnline extends AppCompatActivity {
-    EditText PickUp,DropOff,DropTime,PickTime;
-    TextInputLayout pickLoc,DropLoc,Phone;
+    TextInputLayout Phone,DriverName,DriverMail,fromDate,toDate;
+    EditText pickDate,dropDate;
     TextView car,carP;
     Button placeOrderBtn;
+    ImageView carImage;
     DatePickerDialog.OnDateSetListener setListener,listener;
-    int hr,min,hr1,min1;
     CountryCodePicker picker;
     private String carName = "";
     private String carCharges = "";
+    private String agentName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,34 +60,34 @@ public class BookOnline extends AppCompatActivity {
 
         carName = getIntent().getStringExtra("car Name");
         carCharges = getIntent().getStringExtra("car Charge");
+        agentName = getIntent().getStringExtra("agent");
 
-        PickUp = findViewById(R.id.calD);
         car = findViewById(R.id.bookedcarName);
         carP = findViewById(R.id.rate);
         car.setText(carName);
         carP.setText(carCharges);
-        PickTime = findViewById(R.id.Ptime);
-        DropOff = findViewById(R.id.calDrop);
-        DropTime = findViewById(R.id.TDrop);
-        picker = findViewById(R.id.bookCode);
+         DriverName = findViewById(R.id.driverNameb);
+        DriverMail = findViewById(R.id.driverMailb);
+        picker = findViewById(R.id.countryPickerb);
+        pickDate = findViewById(R.id.DateEdt);
+        dropDate = findViewById(R.id.returnDateEdt);
 
-        pickLoc = findViewById(R.id.PickupLocation);
-        DropLoc = findViewById(R.id.DropoffLocation);
-        Phone = findViewById(R.id.phoneOrder);
+        fromDate = findViewById(R.id.startDateL);
+        toDate = findViewById(R.id.returnDateL);
+        Phone = findViewById(R.id.phoneOrderEdt);
+        carImage =findViewById(R.id.carProductImage);
 
-        placeOrderBtn = findViewById(R.id.Order);
+        placeOrderBtn = findViewById(R.id.bookNowBtn);
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-
-
-        PickUp.setOnClickListener(new View.OnClickListener() {
+        pickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(BookOnline.this,setListener,year,month,day);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(BookOnline.this, android.R.style.Theme,setListener,year,month,day);
 
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
@@ -96,11 +98,11 @@ public class BookOnline extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-                String date = day + "/"+ month+"/"+year;
-                PickUp.setText(date);
+                String date = dayOfMonth + "/"+ month+"/"+year;
+                pickDate.setText(date);
             }
         };
-        DropOff.setOnClickListener(new View.OnClickListener() {
+        dropDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(BookOnline.this,listener,year,month,day);
@@ -113,51 +115,10 @@ public class BookOnline extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
-                String date = day + "/"+ month+"/"+year;
-                DropOff.setText(date);
+                String date = dayOfMonth + "/"+ month+"/"+year;
+                dropDate.setText(date);
             }
         };
-
-        PickTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //initialize timePicker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(BookOnline.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        //initialize hour and minute
-                        hr = hourOfDay;
-                        min = minute;
-                        //initialize calendar
-                        Calendar calendar1 = Calendar.getInstance();
-                        //set hour and minute
-                        calendar1.set(0,0,0,hr,min);
-                        //set selected time
-                        PickTime.setText(DateFormat.format("hh:mm aa",calendar1));
-                    }
-                },12,0,false);
-                //display previous selection
-                timePickerDialog.updateTime(hr,min);
-                //show dialog
-                timePickerDialog.show();
-            }
-        });
-        DropTime.setOnClickListener(v -> {
-            TimePickerDialog timePickerDialog = new TimePickerDialog(BookOnline.this, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    hr1 = hourOfDay;
-                    min1 = minute;
-
-                    Calendar calendar2 = Calendar.getInstance();
-                    calendar2.set(0,0,0,hr1,min1);
-                    DropTime.setText(DateFormat.format("hh:mm aa",calendar2));
-
-                }
-            },12,0,false);
-            timePickerDialog.updateTime(hr1,min1);
-            timePickerDialog.show();
-        });
 
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,10 +127,11 @@ public class BookOnline extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void OrderNow() {
-        if (!validateDrop() | !validatePhone() | !validatePick()){
+        if (!validateName() | !validatePhone() | !validateMail()){
             return;
         }
         else{
@@ -190,14 +152,13 @@ public class BookOnline extends AppCompatActivity {
 
         final DatabaseReference OrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.CurrentOnlineUser.getPhone());
         HashMap<String,Object> ordersMap = new HashMap<>();
-        ordersMap.put("pdate",PickUp.getText().toString());
-        ordersMap.put("pname",carName);
-        ordersMap.put("pcharge",carCharges);
-        ordersMap.put("ptime",PickTime.getText().toString());
-        ordersMap.put("ddate",DropOff.getText().toString());
-        ordersMap.put("dtime",DropTime.getText().toString());
-        ordersMap.put("plocation",pickLoc.getEditText().getText().toString());
-        ordersMap.put("dlocation",DropLoc.getEditText().getText().toString());
+//        ordersMap.put("pdate",PickUp.getText().toString());
+        ordersMap.put("car name",carName);
+        ordersMap.put("Total Amount",carCharges);
+        ordersMap.put("driverName",DriverName.getEditText().getText().toString());
+        ordersMap.put("driverEmail",DriverMail.getEditText().getText().toString());
+        ordersMap.put("From:",fromDate.getEditText().getText().toString());
+        ordersMap.put("To:",toDate.getEditText().getText().toString());
         ordersMap.put("phone_number","+"+picker.getFullNumber()+Phone.getEditText().getText().toString());
         ordersMap.put("date",saveCurrentDate);
         ordersMap.put("time",saveCurrentTime);
@@ -239,25 +200,25 @@ public class BookOnline extends AppCompatActivity {
             return true;
         }
     }
-    private Boolean validateDrop(){
-        String sim = DropLoc.getEditText().getText().toString();
+    private Boolean validateName(){
+        String sim = DriverName.getEditText().getText().toString();
         if (sim.isEmpty()){
-            DropLoc.setError("Enter drop-off location");
+            DriverName.setError("Enter full name");
             return false;
         }else {
-            DropLoc.setError(null);
-            DropLoc.setErrorEnabled(false);
+            DriverName.setError(null);
+            DriverName.setErrorEnabled(false);
             return true;
         }
     }
-    private Boolean validatePick(){
-        String sim = pickLoc.getEditText().getText().toString();
+    private Boolean validateMail(){
+        String sim = DriverMail.getEditText().getText().toString();
         if (sim.isEmpty()){
-            pickLoc.setError("Enter pick-up location");
+            DriverMail.setError("Enter email address");
             return false;
         }else {
-            pickLoc.setError(null);
-            pickLoc.setErrorEnabled(false);
+            DriverMail.setError(null);
+            DriverMail.setErrorEnabled(false);
             return true;
         }
     }

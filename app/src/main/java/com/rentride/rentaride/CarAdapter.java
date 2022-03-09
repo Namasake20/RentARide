@@ -1,13 +1,15 @@
 package com.rentride.rentaride;
 
 import android.view.View;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CarAdapter extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class CarAdapter extends RecyclerView.ViewHolder implements View.OnClickListener, Filterable {
     public ImageView carImg;
     public TextView txtName,txtPass,txtBag,txtDoor,txtTrans,txtPrice;
     public ItemclickListener listener;
@@ -32,5 +34,10 @@ public class CarAdapter extends RecyclerView.ViewHolder implements View.OnClickL
     public void onClick(View v) {
         listener.onClick(v,getAdapterPosition(),false);
 
+    }
+
+    @Override
+    public Filter getFilter() {
+        return null;
     }
 }

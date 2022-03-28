@@ -14,9 +14,12 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -57,6 +60,7 @@ public class Home extends AppCompatActivity
         Paper.init(this);
 
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
@@ -95,8 +99,13 @@ public class Home extends AppCompatActivity
 
         //TODO:returns a null pointer exception
 //        UserName.setText(Prevalent.CurrentOnlineUser.getUsername());
-        UserName.setText(userName);
+//        UserName.setText(userName);
 //        Picasso.get().load(Prevalent.CurrentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImage);
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (signInAccount != null){
+            UserName.setText(signInAccount.getDisplayName());
+
+        }
 
     }
 
@@ -220,8 +229,9 @@ public class Home extends AppCompatActivity
         }
         else if (id == R.id.nav_logout)
         {
-            Paper.book().destroy();
-            Intent intent = new Intent(Home.this,Login.class);
+//            Paper.book().destroy();
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(Home.this,SignIn.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

@@ -280,6 +280,7 @@ public class Login extends AppCompatActivity {
                             Prevalent.CurrentOnlineUser = userData;
 
                             startActivity(intent);
+                            finish();
 
                         }
                         else {

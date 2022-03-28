@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "436286191260",
+    "firebase_url": "https://rentaride-aa3ac-default-rtdb.firebaseio.com",
     "project_id": "rentaride-aa3ac",
     "storage_bucket": "rentaride-aa3ac.appspot.com"
   },
@@ -13,6 +14,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "436286191260-knj1nbaaeqsruq9rikffirgabrbuvec2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rentride.rentaride",
+            "certificate_hash": "3815b95af5a7b42763a96967d98c2fdcdb9b1a23"
+          }
+        },
+        {
+          "client_id": "436286191260-tt6464hbgo9gb5kesgc8p5t6vbcqppmk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rentride.rentaride",
+            "certificate_hash": "e6721440753d4127d217b907494dacb7ebf9ae47"
+          }
+        },
         {
           "client_id": "436286191260-8311ma9hgrub1ktp1c32uun753fcf6sc.apps.googleusercontent.com",
           "client_type": 3

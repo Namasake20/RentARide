@@ -104,6 +104,7 @@ public class Home extends AppCompatActivity
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (signInAccount != null){
             UserName.setText(signInAccount.getDisplayName());
+            Picasso.get().load(signInAccount.getPhotoUrl()).placeholder(R.drawable.profile).into(profileImage);
 
         }
 
@@ -220,13 +221,13 @@ public class Home extends AppCompatActivity
 
         }
 
-        else if (id == R.id.nav_settings)
-        {
-            Intent intent = new Intent(Home.this,Profile.class);
-            startActivity(intent);
-
-
-        }
+//        else if (id == R.id.nav_settings)
+//        {
+//            Intent intent = new Intent(Home.this,Profile.class);
+//            startActivity(intent);
+//
+//
+//        }
         else if (id == R.id.nav_logout)
         {
 //            Paper.book().destroy();

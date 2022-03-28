@@ -68,8 +68,7 @@ public class SignIn extends AppCompatActivity {
         signInClient = GoogleSignIn.getClient(this,gso);
     }
 
-
-    @SuppressWarnings("Deprecated")
+    @SuppressWarnings("deprecation")
     public void SignInUser(){
         Intent signInIntent = signInClient.getSignInIntent();
         startActivityForResult(signInIntent,RC_SIGN_IN);
@@ -104,7 +103,7 @@ public class SignIn extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(),Home.class);
                     startActivity(intent);
                 }else {
-                    Toast.makeText(SignIn.this, "error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignIn.this, "something wrong.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

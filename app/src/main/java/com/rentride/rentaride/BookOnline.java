@@ -66,8 +66,6 @@ public class BookOnline extends AppCompatActivity {
         carP = findViewById(R.id.rate);
         car.setText(carName);
         carP.setText(carCharges);
-         DriverName = findViewById(R.id.driverNameb);
-        DriverMail = findViewById(R.id.driverMailb);
         picker = findViewById(R.id.countryPickerb);
         pickDate = findViewById(R.id.DateEdt);
         dropDate = findViewById(R.id.returnDateEdt);
@@ -155,8 +153,8 @@ public class BookOnline extends AppCompatActivity {
 //        ordersMap.put("pdate",PickUp.getText().toString());
         ordersMap.put("car name",carName);
         ordersMap.put("Total Amount",carCharges);
-        ordersMap.put("driverName",DriverName.getEditText().getText().toString());
-        ordersMap.put("driverEmail",DriverMail.getEditText().getText().toString());
+//        ordersMap.put("driverName",DriverName.getEditText().getText().toString());
+//        ordersMap.put("driverEmail",DriverMail.getEditText().getText().toString());
         ordersMap.put("From:",fromDate.getEditText().getText().toString());
         ordersMap.put("To:",toDate.getEditText().getText().toString());
         ordersMap.put("phone_number","+"+picker.getFullNumber()+Phone.getEditText().getText().toString());

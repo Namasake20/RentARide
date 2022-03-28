@@ -46,7 +46,7 @@ public class CarDetail extends AppCompatActivity {
     Button bookOnline,bookNow;
     EditText startingDate,returningDate;
     String txt = "Hello";
-    TextInputLayout Fname,Mail,PhoneN,startDate,returnDate;
+    TextInputLayout  PhoneN,startDate,returnDate;
     CountryCodePicker picker;
 
     DatePickerDialog.OnDateSetListener setListener,listener;
@@ -69,8 +69,6 @@ public class CarDetail extends AppCompatActivity {
         carDescription = findViewById(R.id.product_details_description);
         carPrice = findViewById(R.id.product_details_price);
 
-        Fname = findViewById(R.id.driverName);
-        Mail = findViewById(R.id.driverMail);
         PhoneN = findViewById(R.id.driverPhone);
 
         startDate = findViewById(R.id.startDateLt);
@@ -78,7 +76,6 @@ public class CarDetail extends AppCompatActivity {
         startingDate = findViewById(R.id.startDateEdt);
         returningDate = findViewById(R.id.returnDateEdt);
 
-        agentName = findViewById(R.id.agentName);
         picker = findViewById(R.id.countryPicker);
 
         dearProfile = findViewById(R.id.agentProfile);
@@ -165,8 +162,8 @@ public class CarDetail extends AppCompatActivity {
         HashMap<String,Object> ordersMap = new HashMap<>();
         ordersMap.put("car name",carName);
         ordersMap.put("Total Amount",carPrice);
-        ordersMap.put("driverName",Fname.getEditText().getText().toString());
-        ordersMap.put("driverEmail",Mail.getEditText().getText().toString());
+//        ordersMap.put("driverName",Fname.getEditText().getText().toString());
+//        ordersMap.put("driverEmail",Mail.getEditText().getText().toString());
         ordersMap.put("From:",startDate.getEditText().getText().toString());
         ordersMap.put("To:",returnDate.getEditText().getText().toString());
         ordersMap.put("phone_number","+"+picker.getFullNumber()+ PhoneN.getEditText().getText().toString());
@@ -199,47 +196,10 @@ public class CarDetail extends AppCompatActivity {
             return true;
         }
     }
-    private Boolean validateName(){
-        String val = Fname.getEditText().getText().toString();
-        String noWhiteSpace = "\\A\\w{4,20}\\z";
-        if (val.isEmpty()){
-            Fname.setError("Enter username");
-            return false;
-        }
-        else if (val.length() >= 15){
-            Fname.setError("Username too long");
-            return false;
-        }
-        else if (!val.matches(noWhiteSpace)){
-            Fname.setError("Whitespace not allowed.");
-            return false;
 
-        }
-        else {
-            Fname.setError(null);
-            Fname.setErrorEnabled(false);
-            return true;
-        }
-    }
-    private Boolean validateEmail(){
-        String mail = Mail.getEditText().getText().toString();
-        String emailPattern = "[a-zA-z0-9._-]+@[a-z]+\\.+[a-z]+";
-        if (mail.isEmpty()){
-            Mail.setError("Enter email");
-            return false;
-        }
-        else if (!mail.matches(emailPattern)){
-            Mail.setError("Invalid email address");
-            return false;
-        }
-        else {
-            Mail.setError(null);
-            Mail.setErrorEnabled(false);
-            return true;
-        }
-    }
+
     public void placeOrder(){
-        if (!validatePhone() | !validateEmail() | !validateName()){
+        if (!validatePhone() ){
             return;
         }
         else

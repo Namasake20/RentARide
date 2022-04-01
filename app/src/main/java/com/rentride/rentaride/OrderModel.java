@@ -1,61 +1,50 @@
 package com.rentride.rentaride;
 
 public class OrderModel {
-    private String ddate,dlocation,dtime,pcharge,pdate,phone_number,plocation,pname,ptime;
+    private String pickUpDate,returnDate,total_amount,car_name,phone_number,time;
 
     public OrderModel() {
     }
 
-    public OrderModel(String ddate, String dlocation, String dtime, String pcharge, String pdate, String phone_number, String plocation, String pname, String ptime) {
-        this.ddate = ddate;
-        this.dlocation = dlocation;
-        this.dtime = dtime;
-        this.pcharge = pcharge;
-        this.pdate = pdate;
+    public OrderModel(String pickUpDate, String returnDate, String total_amount, String car_name, String phone_number, String time) {
+        this.pickUpDate = pickUpDate;
+        this.returnDate = returnDate;
+        this.total_amount = total_amount;
+        this.car_name = car_name;
         this.phone_number = phone_number;
-        this.plocation = plocation;
-        this.pname = pname;
-        this.ptime = ptime;
+        this.time = time;
     }
 
-    public String getDdate() {
-        return ddate;
+    public String getPickUpDate() {
+        return pickUpDate;
     }
 
-    public void setDdate(String ddate) {
-        this.ddate = ddate;
+    public void setPickUpDate(String pickUpDate) {
+        this.pickUpDate = pickUpDate;
     }
 
-    public String getDlocation() {
-        return dlocation;
+    public String getReturnDate() {
+        return returnDate;
     }
 
-    public void setDlocation(String dlocation) {
-        this.dlocation = dlocation;
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
     }
 
-    public String getDtime() {
-        return dtime;
+    public String getTotal_amount() {
+        return total_amount;
     }
 
-    public void setDtime(String dtime) {
-        this.dtime = dtime;
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
     }
 
-    public String getPcharge() {
-        return pcharge;
+    public String getCar_name() {
+        return car_name;
     }
 
-    public void setPcharge(String pcharge) {
-        this.pcharge = pcharge;
-    }
-
-    public String getPdate() {
-        return pdate;
-    }
-
-    public void setPdate(String pdate) {
-        this.pdate = pdate;
+    public void setCar_name(String car_name) {
+        this.car_name = car_name;
     }
 
     public String getPhone_number() {
@@ -66,27 +55,11 @@ public class OrderModel {
         this.phone_number = phone_number;
     }
 
-    public String getPlocation() {
-        return plocation;
+    public String getTime() {
+        return time;
     }
 
-    public void setPlocation(String plocation) {
-        this.plocation = plocation;
-    }
-
-    public String getPname() {
-        return pname;
-    }
-
-    public void setPname(String pname) {
-        this.pname = pname;
-    }
-
-    public String getPtime() {
-        return ptime;
-    }
-
-    public void setPtime(String ptime) {
-        this.ptime = ptime;
+    public void setTime(String time) {
+        this.time = time;
     }
 }

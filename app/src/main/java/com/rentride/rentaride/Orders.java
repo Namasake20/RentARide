@@ -12,20 +12,19 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Orders extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    private DatabaseReference ordersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
-
-        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
 
         recyclerView = findViewById(R.id.orderRV);
         recyclerView.setHasFixedSize(true);
@@ -37,17 +36,19 @@ public class Orders extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(Orders.this);
+        final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
 
-        FirebaseRecyclerOptions<OrderModel> options = new FirebaseRecyclerOptions.Builder<OrderModel>().setQuery(ordersRef,OrderModel.class).build();;
+        FirebaseRecyclerOptions<OrderModel> options = new FirebaseRecyclerOptions.Builder<OrderModel>().setQuery(ordersRef.child(String.valueOf(signInAccount.getEmail()).replace(".","*")).child("Booked"),OrderModel.class).build();
 
         FirebaseRecyclerAdapter<OrderModel, OrderAdapter> adapter = new FirebaseRecyclerAdapter<OrderModel, OrderAdapter>(options) {
             @Override
             protected void onBindViewHolder(@NonNull OrderAdapter orderAdapter, int i, @NonNull OrderModel orderModel) {
-                orderAdapter.txtCarNameO.setText(orderModel.getPname());
-                orderAdapter.txtPickDate.setText(orderModel.getPdate()+"-");
-                orderAdapter.txtDropDate.setText(orderModel.getDdate());
-                orderAdapter.txtPickPlace.setText(orderModel.getPlocation());
-                orderAdapter.txtCarPriceO.setText(orderModel.getPcharge());
+                orderAdapter.txtCarNameO.setText(orderModel.getCar_name());
+                orderAdapter.txtPickDate.setText(orderModel.getPickUpDate()+"-");
+                orderAdapter.txtDropDate.setText(orderModel.getReturnDate());
+                orderAdapter.txtPickPlace.setText(orderModel.getPhone_number());
+                orderAdapter.txtCarPriceO.setText(orderModel.getTotal_amount());
             }
 
             @NonNull

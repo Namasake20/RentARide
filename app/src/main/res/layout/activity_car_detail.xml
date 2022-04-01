@@ -92,6 +92,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="5dp"
                 android:id="@+id/RVBooking">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -100,110 +102,75 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Driver Details"
+                        android:text="RATES INCLUDE:"
                         android:layout_marginStart="5dp"
                         android:textSize="18sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/purple_500"
                         android:textStyle="bold"/>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp">
-                        <com.hbb20.CountryCodePicker
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/countryPicker"
-                            app:ccp_autoDetectCountry="true"
-                            android:layout_alignParentStart="true"/>
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_marginRight="20dp"
-                            android:id="@+id/driverPhone">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Phone Number" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
+                        android:text="Third party cover"
+                        android:id="@+id/txt1"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_baseline_security_24" />
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp">
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_alignParentStart="true"
-                            app:startIconDrawable="@drawable/ic_calendar"
-                            android:id="@+id/startDateLt">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="date"
-                                android:id="@+id/startDateEdt"
-                                android:hint="From:"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="150dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            app:startIconDrawable="@drawable/ic_calendar"
-                            android:id="@+id/dropDateL">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="date"
-                                android:id="@+id/returnDateEdt"
-                                android:hint="To:"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
+                        android:text="Free cancellation up to 48 hours before pick up"
+                        android:id="@+id/txt23"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_baseline_check_24" />
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp">
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:layout_alignParentEnd="true"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/book_now"
-                            android:background="@drawable/custom_btn"
-                            android:textAllCaps="false"
-                            android:padding="13dp"
-                            android:backgroundTint="@color/teal_700"
-                            android:textStyle="normal"
-                            android:textColor="@color/white"
-                            android:id="@+id/bookNow"
-                            android:layout_marginRight="20dp"/>
+                        android:text="Collision damage waiver"
+                        android:textColor="@color/black"
+                        android:id="@+id/txt43"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_baseline_car_crash_24" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fuel policy:Full to Full"
+                        android:textColor="@color/black"
+                        android:id="@+id/txt1w"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_baseline_local_gas_station_24" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unlimited mileage"
+                        android:textColor="@color/black"
+                        android:id="@+id/txt431"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_baseline_check_24" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Partial protection for theft"
+                        android:id="@+id/txt4321"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        app:drawableStartCompat="@drawable/ic_baseline_check_24" />
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/custom_btn"
-                            android:layout_alignParentStart="true"
-                            android:text="Save this car"
-                            android:drawableStart="@drawable/favorite_border"
-                            android:textAllCaps="false"
-                            android:textColor="@color/teal_700"
-                            android:id="@+id/pd_add_to_cart"
-                            android:gravity="center"
-                            android:padding="15dp"
-                            android:layout_marginStart="5dp"
-                            />
-
-                    </RelativeLayout>
 
                 </LinearLayout>
 
+
             </RelativeLayout>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Book Now"
+                android:padding="13dp"
+                android:id="@+id/btnBookNow"
+                android:layout_margin="20dp"/>
 
         </LinearLayout>
+
 
 
     </com.google.android.material.card.MaterialCardView>

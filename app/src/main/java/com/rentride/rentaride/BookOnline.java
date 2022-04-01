@@ -29,12 +29,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
+import com.squareup.picasso.Picasso;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -42,7 +45,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class BookOnline extends AppCompatActivity {
-    TextInputLayout Phone,DriverName,DriverMail,fromDate,toDate;
+    TextInputLayout Phone,fromDate,toDate;
     EditText pickDate,dropDate;
     TextView car,carP;
     Button placeOrderBtn;
@@ -52,6 +55,7 @@ public class BookOnline extends AppCompatActivity {
     private String carName = "";
     private String carCharges = "";
     private String agentName = "";
+    private String jina = "name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,7 @@ public class BookOnline extends AppCompatActivity {
         carName = getIntent().getStringExtra("car Name");
         carCharges = getIntent().getStringExtra("car Charge");
         agentName = getIntent().getStringExtra("agent");
+        jina = getIntent().getStringExtra("name");
 
         car = findViewById(R.id.bookedcarName);
         carP = findViewById(R.id.rate);
@@ -103,9 +108,9 @@ public class BookOnline extends AppCompatActivity {
         dropDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(BookOnline.this,listener,year,month,day);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(BookOnline.this,android.R.style.Theme,listener,year,month,day);
 
-                datePickerDialog.getWindow();
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
             }
         });
@@ -129,7 +134,7 @@ public class BookOnline extends AppCompatActivity {
     }
 
     private void OrderNow() {
-        if (!validateName() | !validatePhone() | !validateMail()){
+        if ( !validatePhone()){
             return;
         }
         else{
@@ -147,16 +152,14 @@ public class BookOnline extends AppCompatActivity {
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(BookOnline.this);
 
-        final DatabaseReference OrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.CurrentOnlineUser.getPhone());
+        final DatabaseReference OrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(String.valueOf(signInAccount.getEmail()).replace(".","*")).child("Booked").child(saveCurrentDate);
         HashMap<String,Object> ordersMap = new HashMap<>();
-//        ordersMap.put("pdate",PickUp.getText().toString());
-        ordersMap.put("car name",carName);
-        ordersMap.put("Total Amount",carCharges);
-//        ordersMap.put("driverName",DriverName.getEditText().getText().toString());
-//        ordersMap.put("driverEmail",DriverMail.getEditText().getText().toString());
-        ordersMap.put("From:",fromDate.getEditText().getText().toString());
-        ordersMap.put("To:",toDate.getEditText().getText().toString());
+        ordersMap.put("car_name",jina);
+        ordersMap.put("total_mount",carCharges);
+        ordersMap.put("pickUpDate",fromDate.getEditText().getText().toString());
+        ordersMap.put("returnDate",toDate.getEditText().getText().toString());
         ordersMap.put("phone_number","+"+picker.getFullNumber()+Phone.getEditText().getText().toString());
         ordersMap.put("date",saveCurrentDate);
         ordersMap.put("time",saveCurrentTime);
@@ -166,8 +169,8 @@ public class BookOnline extends AppCompatActivity {
                 if (task.isSuccessful()){
                     FirebaseDatabase.getInstance().getReference()
                             .child("Book List")
-                            .child("User View")
-                            .child(Prevalent.CurrentOnlineUser.getPhone())
+                            .child("Saved")
+                            .child(String.valueOf(signInAccount.getEmail()).replace(".","*"))
                             .removeValue()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -195,28 +198,6 @@ public class BookOnline extends AppCompatActivity {
         }else {
             Phone.setError(null);
             Phone.setErrorEnabled(false);
-            return true;
-        }
-    }
-    private Boolean validateName(){
-        String sim = DriverName.getEditText().getText().toString();
-        if (sim.isEmpty()){
-            DriverName.setError("Enter full name");
-            return false;
-        }else {
-            DriverName.setError(null);
-            DriverName.setErrorEnabled(false);
-            return true;
-        }
-    }
-    private Boolean validateMail(){
-        String sim = DriverMail.getEditText().getText().toString();
-        if (sim.isEmpty()){
-            DriverMail.setError("Enter email address");
-            return false;
-        }else {
-            DriverMail.setError(null);
-            DriverMail.setErrorEnabled(false);
             return true;
         }
     }

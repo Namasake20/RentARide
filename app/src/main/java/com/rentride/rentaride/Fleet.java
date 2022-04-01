@@ -11,14 +11,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -36,6 +40,7 @@ public class Fleet extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
     }
 
     @Override
@@ -43,8 +48,10 @@ public class Fleet extends AppCompatActivity {
         super.onStart();
         final DatabaseReference bookList = FirebaseDatabase.getInstance().getReference().child("Book List");
 
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(Fleet.this);
+
         FirebaseRecyclerOptions<FleetModel> options = new FirebaseRecyclerOptions.Builder<FleetModel>()
-                .setQuery(bookList.child("User View").child(Prevalent.CurrentOnlineUser.getPhone()).child("Products"), FleetModel.class).build();
+                .setQuery(bookList.child("Saved").child(String.valueOf(signInAccount.getEmail()).replace(".","*")).child("Products"), FleetModel.class).build();
 
         FirebaseRecyclerAdapter<FleetModel, FleetAdapter> adapter = new FirebaseRecyclerAdapter<FleetModel, FleetAdapter>(options) {
 
@@ -73,11 +80,10 @@ public class Fleet extends AppCompatActivity {
                                     intent.putExtra("car Name",fleetModel.getPname());
                                     intent.putExtra("car Charge",fleetModel.getPrice());
                                     intent.putExtra("agent",fleetModel.getAgentUsername());
-                                    intent.putExtra("id",fleetModel.getPid());
                                     startActivity(intent);
                                 }
                                 else if (i == 1){
-                                    bookList.child("User View").child(Prevalent.CurrentOnlineUser.getPhone()).child("Products")
+                                    bookList.child("Saved").child(String.valueOf(signInAccount.getEmail()).replace(".","*")).child("Products")
                                             .child(fleetModel.getPid())
                                             .removeValue()
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {

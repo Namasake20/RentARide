@@ -40,4 +40,11 @@
     <string name="submit">Submit</string>
     <string name="search_rentaride">Search RentARide</string>
     <string name="book_now">Book Now</string>
+    <string name="title_activity_easy_navigation">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="saved">Saved</string>
+    <string name="orders">Orders</string>
+
 </resources>

@@ -6,7 +6,9 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -22,11 +24,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SignIn extends AppCompatActivity {
     AppCompatButton SignInButton;
+    TextView TermsConditions;
     private GoogleSignInClient signInClient;
     private final static int RC_SIGN_IN= 123;
     private FirebaseAuth auth;
+    String[] email = new String[] {"calebmasake69@gmail.com","nastymasake@gmail.com"};
+    List<String> emailList = new ArrayList<>(Arrays.asList(email));
 
     @Override
     protected void onStart() {
@@ -52,7 +61,8 @@ public class SignIn extends AppCompatActivity {
         });
         auth = FirebaseAuth.getInstance();
 
-
+        TermsConditions = findViewById(R.id.termsConditions);
+        TermsConditions.setMovementMethod(LinkMovementMethod.getInstance());
 
         createSignInRequest();
     }

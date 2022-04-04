@@ -1,7 +1,10 @@
-package com.rentride.rentaride;
+package com.rentride.rentaride.MyAdapter;
 
 import android.view.View;
 import android.widget.TextView;
+
+import com.rentride.rentaride.ItemclickListener;
+import com.rentride.rentaride.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,8 +16,8 @@ public class OrderAdapter extends RecyclerView.ViewHolder implements View.OnClic
         super(itemView);
 
         txtCarNameO = itemView.findViewById(R.id.carNameO);
-        txtCarPriceO = itemView.findViewById(R.id.TotalText);
-        txtDropDate = itemView.findViewById(R.id.dateDr);
+        txtCarPriceO = itemView.findViewById(R.id.TotalTextP);
+        txtDropDate = itemView.findViewById(R.id.returningDate);
         txtPickDate = itemView.findViewById(R.id.dateO);
         txtPickPlace = itemView.findViewById(R.id.PickReturn);
 

@@ -16,6 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.rentride.rentaride.MyAdapter.OrderAdapter;
+import com.rentride.rentaride.MyModel.OrderModel;
 
 public class Orders extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -45,10 +47,10 @@ public class Orders extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull OrderAdapter orderAdapter, int i, @NonNull OrderModel orderModel) {
                 orderAdapter.txtCarNameO.setText(orderModel.getCar_name());
-                orderAdapter.txtPickDate.setText(orderModel.getPickUpDate()+"-");
+                orderAdapter.txtPickDate.setText(orderModel.getPickUpDate());
                 orderAdapter.txtDropDate.setText(orderModel.getReturnDate());
-                orderAdapter.txtPickPlace.setText(orderModel.getPhone_number());
-                orderAdapter.txtCarPriceO.setText(orderModel.getTotal_amount());
+//                orderAdapter.txtPickPlace.setText(orderModel.getPhone_number());
+                orderAdapter.txtCarPriceO.setText("KES"+orderModel.getTotal_amount());
             }
 
             @NonNull

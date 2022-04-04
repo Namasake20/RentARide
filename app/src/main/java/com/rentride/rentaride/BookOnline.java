@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.format.DateFormat;
@@ -55,7 +56,7 @@ public class BookOnline extends AppCompatActivity {
     private String carName = "";
     private String carCharges = "";
     private String agentName = "";
-    private String jina = "name";
+    private String jina = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +68,11 @@ public class BookOnline extends AppCompatActivity {
         agentName = getIntent().getStringExtra("agent");
         jina = getIntent().getStringExtra("name");
 
+
         car = findViewById(R.id.bookedcarName);
         carP = findViewById(R.id.rate);
-        car.setText(carName);
-        carP.setText(carCharges);
+        car.setText(jina);
+        carP.setText("KES "+carCharges);
         picker = findViewById(R.id.countryPickerb);
         pickDate = findViewById(R.id.DateEdt);
         dropDate = findViewById(R.id.returnDateEdt);
@@ -134,7 +136,7 @@ public class BookOnline extends AppCompatActivity {
     }
 
     private void OrderNow() {
-        if ( !validatePhone()){
+        if ( !validatePhone() | !validateStartDate() | !validateEndDate()){
             return;
         }
         else{
@@ -152,41 +154,16 @@ public class BookOnline extends AppCompatActivity {
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
-        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(BookOnline.this);
 
-        final DatabaseReference OrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(String.valueOf(signInAccount.getEmail()).replace(".","*")).child("Booked").child(saveCurrentDate);
-        HashMap<String,Object> ordersMap = new HashMap<>();
-        ordersMap.put("car_name",jina);
-        ordersMap.put("total_mount",carCharges);
-        ordersMap.put("pickUpDate",fromDate.getEditText().getText().toString());
-        ordersMap.put("returnDate",toDate.getEditText().getText().toString());
-        ordersMap.put("phone_number","+"+picker.getFullNumber()+Phone.getEditText().getText().toString());
-        ordersMap.put("date",saveCurrentDate);
-        ordersMap.put("time",saveCurrentTime);
-        OrdersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    FirebaseDatabase.getInstance().getReference()
-                            .child("Book List")
-                            .child("Saved")
-                            .child(String.valueOf(signInAccount.getEmail()).replace(".","*"))
-                            .removeValue()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        Intent intent = new Intent(BookOnline.this,Home.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }
-                            });
-                }
-
-            }
-        });
+        Intent intent = new Intent(BookOnline.this,VerificationOTP.class);
+        intent.putExtra("name",jina);
+        intent.putExtra("total amount",carCharges);
+        intent.putExtra("pickUpDate",fromDate.getEditText().getText().toString());
+        intent.putExtra("returnDate",toDate.getEditText().getText().toString());
+        intent.putExtra("phone_number","+"+picker.getFullNumber()+Phone.getEditText().getText().toString());
+        intent.putExtra("date",saveCurrentDate);
+        intent.putExtra("time",saveCurrentTime);
+        startActivity(intent);
 
     }
 
@@ -198,6 +175,28 @@ public class BookOnline extends AppCompatActivity {
         }else {
             Phone.setError(null);
             Phone.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validateStartDate(){
+        String kutoka = fromDate.getEditText().getText().toString();
+        if (kutoka.isEmpty()){
+            fromDate.setError("Pick date");
+            return false;
+        }else {
+            fromDate.setError(null);
+            fromDate.setErrorEnabled(false);
+            return true;
+        }
+    }
+    private Boolean validateEndDate(){
+        String hadi = toDate.getEditText().getText().toString();
+        if (hadi.isEmpty()){
+            toDate.setError("Pick date");
+            return false;
+        }else {
+            toDate.setError(null);
+            toDate.setErrorEnabled(false);
             return true;
         }
     }

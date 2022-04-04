@@ -1,4 +1,4 @@
-package com.rentride.rentaride;
+package com.rentride.rentaride.MyModel;
 
 public class FleetModel {
     private String agentUsername,date,pid,pname,price,time;

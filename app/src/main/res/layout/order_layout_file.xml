@@ -14,20 +14,49 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Car name"
-            android:id="@+id/carNameO"
+            android:text="Booking Summary"
+            android:id="@+id/bookingSummary"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:gravity="center_horizontal"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_below="@+id/bookingSummary"
+            android:background="@android:color/darker_gray"
+            android:padding="2dp"
+            android:layout_height="1dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/bookingSummary"
+            android:id="@+id/carNameDetails">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Vehicle"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:text="Luxury"
+                android:id="@+id/carNameO"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trip Dates"
+            android:text="Pick-up"
+            android:layout_marginTop="15dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/purple_700"
-            android:layout_below="@id/carNameO"
+            android:textColor="@color/black"
+            android:layout_below="@id/carNameDetails"
             android:id="@+id/tripD"
             />
         <LinearLayout
@@ -39,64 +68,132 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10/12/2021-"
+                android:text="Start date"
                 android:textSize="18sp"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 android:textColor="@color/black"
-                android:id="@+id/dateO"
-                android:layout_marginStart="30dp"
+                android:id="@+id/TxtDateO"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12/12/2021"
-                android:id="@+id/dateDr"
+                android:text="12/04/2022"
+                android:id="@+id/dateO"
                 android:textSize="18sp"
-                android:textStyle="bold"
+                android:textStyle="normal"
+                android:layout_marginStart="40dp"
                 android:textColor="@color/black"
                 />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/pLocation"
+            android:layout_below="@+id/dateOP">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waiyaki Way,Nairobi"
+                android:id="@+id/PickReturn"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:layout_marginStart="50dp"
+                android:textColor="@color/black"
+                />
+
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pickup &amp; Return"
+            android:text="Return"
+            android:layout_marginTop="15dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/purple_700"
-            android:layout_below="@id/dateOP"
+            android:textColor="@color/black"
+            android:layout_below="@id/pLocation"
             android:id="@+id/PickDo"
             />
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/PickReturn"
             android:layout_below="@+id/PickDo"
-            android:text="Mombasa"
-            android:textSize="18sp"
-            android:layout_marginStart="30dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rate"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/purple_700"
-            android:layout_below="@id/PickReturn"
-            android:id="@+id/Total"
-            />
-        <TextView
+            android:id="@+id/returnDetails"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End date"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/returningDate"
+                android:text="14/4/2022"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="45dp"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/TotalText"
-            android:layout_below="@+id/Total"
-            android:text="Ksh.9000/Day"
-            android:textSize="18sp"
-            android:layout_marginStart="30dp"
-            android:textStyle="bold"
-            android:textColor="@color/design_default_color_error"/>
+            android:id="@+id/dropLocDetail"
+            android:orientation="horizontal"
+            android:layout_below="@+id/returnDetails">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="Location"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waiyaki Way,Nairobi"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:layout_marginStart="45dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/dropLocDetail"
+            android:layout_marginTop="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOTAL PRICE"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KES 23,800"
+                android:textSize="18sp"
+                android:textColor="@color/design_default_color_error"
+                android:layout_marginStart="40dp"
+                android:id="@+id/TotalTextP"/>
+
+        </LinearLayout>
 
 
     </RelativeLayout>

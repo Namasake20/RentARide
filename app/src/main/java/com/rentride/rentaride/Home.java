@@ -7,22 +7,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.rentride.rentaride.MyAdapter.CarAdapter;
+import com.rentride.rentaride.MyModel.Cars;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -30,10 +28,6 @@ import java.util.HashMap;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -70,7 +64,7 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this,Fleet.class);
+                Intent intent = new Intent(Home.this,Orders.class);
                 startActivity(intent);
             }
         });
@@ -127,7 +121,7 @@ public class Home extends AppCompatActivity
                         carAdapter.txtBag.setText("Air conditioning "+cars.getAc());
                         carAdapter.txtDoor.setText(cars.getDoors()+" Doors");
                         carAdapter.txtTrans.setText(cars.getTransmission()+" transmission");
-                        carAdapter.txtPrice.setText("$"+ cars.getPrice()+"/Day");
+                        carAdapter.txtPrice.setText("KES "+ cars.getPrice()+"/Day");
                         Picasso.get().load(cars.getImg()).into(carAdapter.carImg);
 
                         carAdapter.itemView.setOnClickListener(new View.OnClickListener() {
@@ -211,8 +205,8 @@ public class Home extends AppCompatActivity
 
         if (id == R.id.nav_cart)
         {
-            Intent intent = new Intent(Home.this,Fleet.class);
-            startActivity(intent);
+//            Intent intent = new Intent(Home.this,Fleet.class);
+//            startActivity(intent);
 
         }
         else if (id == R.id.nav_orders)

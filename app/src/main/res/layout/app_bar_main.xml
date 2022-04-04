@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:srcCompat="@drawable/shopping_cart"
+        app:srcCompat="@drawable/orders"
          />
 
     <include layout="@layout/content_main" />

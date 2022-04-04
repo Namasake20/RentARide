@@ -7,26 +7,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ablanco.zoomy.Zoomy;
-import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,12 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
+import com.rentride.rentaride.MyModel.Cars;
 import com.squareup.picasso.Picasso;
-
-import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
 
 public class CarDetail extends AppCompatActivity {
     ImageView carImage,textMsg,makeCall;
@@ -103,6 +89,7 @@ public class CarDetail extends AppCompatActivity {
                             intent.putExtra("car Charge",products.getPrice());
                             intent.putExtra("agent",products.getAgentUsername());
                             intent.putExtra("name",products.getName());
+                            intent.putExtra("image",products.getImg());
                             startActivity(intent);
 
                         }
@@ -131,7 +118,7 @@ public class CarDetail extends AppCompatActivity {
                     assert products != null;
                     carName.setText(products.getName());
                     carDescription.setText(products.getTransmission());
-                    carPrice.setText( "$"+products.getPrice()+"/Day");
+                    carPrice.setText( "KES "+products.getPrice()+"/Day");
                     agentName.setText(products.getAgentUsername());
                     Picasso.get().load(products.getImg()).into(carImage);
                     number = products.getAgentPhone();

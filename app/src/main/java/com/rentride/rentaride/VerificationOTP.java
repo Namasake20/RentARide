@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -49,7 +51,6 @@ public class VerificationOTP extends AppCompatActivity {
         String phone = getIntent().getStringExtra("phone_number");
 
         action = getIntent().getStringExtra("Action");
-        phoneNumber = getIntent().getStringExtra("phone_number");
 
 
         btnCode.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +90,6 @@ public class VerificationOTP extends AppCompatActivity {
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
             Toast.makeText(VerificationOTP.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//            System.out.println(e.getMessage());
-//            Log.d(e.getMessage(),"Error");
 
         }
     };
@@ -106,14 +105,7 @@ public class VerificationOTP extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    //forgot password
-                    if (action.equals("updatePass")){
-                        updatePassword();
-                    }
-                    //register new user
-                    else if (action.equals("register")){
-                    storeNewUserData();
-                    }
+                    storeBookingDetails();
 
                 }
                 else {
@@ -126,47 +118,37 @@ public class VerificationOTP extends AppCompatActivity {
         });
     }
 
-    private void updatePassword() {
-        Intent intent = new Intent(VerificationOTP.this,ResetPassword.class);
-        intent.putExtra("phone_number",phoneNumber);
-        startActivity(intent);
-        finish();
-    }
-    public void storeNewUserData(){
-        String phoneNo = getIntent().getStringExtra("phone_number");
-        String mail = getIntent().getStringExtra("mail");
-        String name = getIntent().getStringExtra("name");
-        String pass = getIntent().getStringExtra("password");
-        final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference();
-        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HashMap<String,Object> userDataMap = new HashMap<>();
-                userDataMap.put("phone",phoneNo);
-                userDataMap.put("email",mail);
-                userDataMap.put("password",pass);
-                userDataMap.put("username",name);
+    public void storeBookingDetails(){
+        String phone_number = getIntent().getStringExtra("phone_number");
+        String car_name = getIntent().getStringExtra("name");
+        String total_amount = getIntent().getStringExtra("total amount");
+        String pickUpDate = getIntent().getStringExtra("pickUpDate");
+        String returnDate = getIntent().getStringExtra("returnDate");
+        String date = getIntent().getStringExtra("date");
+        String time = getIntent().getStringExtra("time");
 
-                RootRef.child("Users").child(phoneNo).updateChildren(userDataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Intent intent = new Intent(VerificationOTP.this,Login.class);
-                            startActivity(intent);
-                        }
-                        else {
-                            Toast.makeText(VerificationOTP.this, "Something wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(VerificationOTP.this);
 
+        final DatabaseReference OrdersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(String.valueOf(signInAccount.getEmail()).replace(".","*")).child("Booked").child(date);
+        HashMap<String,Object> ordersMap = new HashMap<>();
+        ordersMap.put("car_name",car_name);
+        ordersMap.put("total_amount",total_amount);
+        ordersMap.put("pickUpDate",pickUpDate);
+        ordersMap.put("returnDate",returnDate);
+        ordersMap.put("phone_number",phone_number);
+        ordersMap.put("date",date);
+        ordersMap.put("time",time);
+        OrdersRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Intent intent = new Intent(VerificationOTP.this,Home.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();;
+                }
 
             }
         });
-
     }
 }

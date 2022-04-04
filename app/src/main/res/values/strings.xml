@@ -31,7 +31,7 @@
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="read_and_agree_to">Read and agree to</string>
     <string name="already_have_an_account">Already have an account?</string>
-    <string name="hyperlink"><a href="https://pages.flycricket.io/rentaride/terms.html">Terms and Conditions</a></string>
+    <string name="hyperlink"><a href="https://pages.flycricket.io/rentaride/terms.html">Terms and Conditions.</a></string>
 
     <string name="signin">SignIn</string>
     <string name="register">REGISTER</string>

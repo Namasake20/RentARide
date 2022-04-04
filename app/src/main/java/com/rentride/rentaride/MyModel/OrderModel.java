@@ -1,4 +1,4 @@
-package com.rentride.rentaride;
+package com.rentride.rentaride.MyModel;
 
 public class OrderModel {
     private String pickUpDate,returnDate,total_amount,car_name,phone_number,time;

@@ -1,4 +1,4 @@
-package com.rentride.rentaride;
+package com.rentride.rentaride.MyModel;
 
 public class Cars {
     public String name,price,img,pid,date,time,agentPhone,agentUsername,ac,doors,transmission,passengers;

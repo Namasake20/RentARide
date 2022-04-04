@@ -1,8 +1,11 @@
-package com.rentride.rentaride;
+package com.rentride.rentaride.MyAdapter;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.rentride.rentaride.ItemclickListener;
+import com.rentride.rentaride.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;

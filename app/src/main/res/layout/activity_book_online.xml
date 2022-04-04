@@ -100,7 +100,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Driver Details"
+                        android:text="Booking Details"
                         android:layout_marginStart="5dp"
                         android:textSize="18sp"
                         android:textColor="@color/black"
@@ -113,6 +113,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/countryPickerb"
+                            android:layout_marginStart="15dp"
                             app:ccp_autoDetectCountry="true"
                             android:layout_alignParentStart="true"/>
                         <com.google.android.material.textfield.TextInputLayout
@@ -120,7 +121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginEnd="20dp"
                             android:id="@+id/phoneOrderEdt">
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
@@ -129,41 +130,32 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </RelativeLayout>
-                    <RelativeLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp">
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="140dp"
+                        android:layout_margin="20dp"
+                        app:startIconDrawable="@drawable/ic_calendar"
+                        android:id="@+id/startDateL">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_alignParentStart="true"
-                            app:startIconDrawable="@drawable/ic_calendar"
-                            android:id="@+id/startDateL">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="date"
-                                android:id="@+id/DateEdt"
-                                android:hint="From:"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="140dp"
-                            android:layout_alignParentEnd="true"
+                            android:inputType="date"
+                            android:id="@+id/DateEdt"
+                            android:hint="From:"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        app:startIconDrawable="@drawable/ic_calendar"
+                        android:id="@+id/returnDateL">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
-                            app:startIconDrawable="@drawable/ic_calendar"
-                            android:id="@+id/returnDateL">
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="date"
-                                android:id="@+id/returnDateEdt"
-                                android:hint="To:"/>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </RelativeLayout>
+                            android:inputType="date"
+                            android:id="@+id/returnDateEdt"
+                            android:hint="To:"/>
+                    </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

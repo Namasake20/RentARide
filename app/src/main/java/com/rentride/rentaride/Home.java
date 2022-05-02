@@ -98,7 +98,7 @@ public class Home extends AppCompatActivity
 //        Picasso.get().load(Prevalent.CurrentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImage);
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (signInAccount != null){
-            UserName.setText(signInAccount.getDisplayName());
+            UserName.setText(signInAccount.getEmail());
             Picasso.get().load(signInAccount.getPhotoUrl()).placeholder(R.drawable.profile).into(profileImage);
 
         }

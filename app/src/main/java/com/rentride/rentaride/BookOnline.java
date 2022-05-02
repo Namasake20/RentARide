@@ -50,7 +50,6 @@ public class BookOnline extends AppCompatActivity {
     EditText pickDate,dropDate;
     TextView car,carP;
     Button placeOrderBtn;
-    ImageView carImage;
     DatePickerDialog.OnDateSetListener setListener,listener;
     CountryCodePicker picker;
     private String carName = "";
@@ -80,7 +79,6 @@ public class BookOnline extends AppCompatActivity {
         fromDate = findViewById(R.id.startDateL);
         toDate = findViewById(R.id.returnDateL);
         Phone = findViewById(R.id.phoneOrderEdt);
-        carImage =findViewById(R.id.carProductImage);
 
         placeOrderBtn = findViewById(R.id.bookNowBtn);
 
@@ -128,6 +126,9 @@ public class BookOnline extends AppCompatActivity {
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                String sim = Phone.getEditText().getText().toString();
+//                sim = sim.substring(sim.length() - 2);
+//                Toast.makeText(BookOnline.this, sim, Toast.LENGTH_SHORT).show();
                 OrderNow();
             }
         });
@@ -155,6 +156,9 @@ public class BookOnline extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
+        String sim = Phone.getEditText().getText().toString();
+        sim = sim.substring(sim.length() - 3);
+
         Intent intent = new Intent(BookOnline.this,VerificationOTP.class);
         intent.putExtra("name",jina);
         intent.putExtra("total amount",carCharges);
@@ -162,6 +166,7 @@ public class BookOnline extends AppCompatActivity {
         intent.putExtra("returnDate",toDate.getEditText().getText().toString());
         intent.putExtra("phone_number","+"+picker.getFullNumber()+Phone.getEditText().getText().toString());
         intent.putExtra("date",saveCurrentDate);
+        intent.putExtra("232",sim);
         intent.putExtra("time",saveCurrentTime);
         startActivity(intent);
 

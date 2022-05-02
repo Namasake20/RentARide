@@ -199,8 +199,8 @@ public class AdminPanel extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
 
                 if (task.isSuccessful()){
-                    Intent intent = new Intent(AdminPanel.this,Login.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(AdminPanel.this,Login.class);
+//                    startActivity(intent);
                     Toast.makeText(AdminPanel.this, "Product added successfully.", Toast.LENGTH_SHORT).show();
                 }
                 else {

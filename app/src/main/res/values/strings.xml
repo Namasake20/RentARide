@@ -16,7 +16,7 @@
 
     <string name="otp_code">Code</string>
     <string name="otp_text">Phone Verification</string>
-    <string name="otp_description">Enter code sent to phone Number</string>
+    <string name="otp_description">Enter code sent to </string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -46,5 +46,6 @@
     <string name="title_notifications">Notifications</string>
     <string name="saved">Saved</string>
     <string name="orders">Orders</string>
+    <string name="_694">...694</string>
 
 </resources>

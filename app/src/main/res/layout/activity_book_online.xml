@@ -29,18 +29,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_alignParentStart="true">
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_marginStart="5dp"
-                        android:id="@+id/carProductImage"
-                        android:src="@drawable/car"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginStart="150dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="20dp">
                     <TextView
@@ -68,23 +62,6 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         />
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_location"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/TxtLocation"
-                            android:text="Nairobi,Waiyaki Way"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            android:textStyle="normal"/>
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -113,15 +90,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/countryPickerb"
-                            android:layout_marginStart="15dp"
+                            android:layout_marginStart="10dp"
                             app:ccp_autoDetectCountry="true"
                             android:layout_alignParentStart="true"/>
                         <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="140dp"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_marginEnd="20dp"
+                            android:layout_marginEnd="10dp"
                             android:id="@+id/phoneOrderEdt">
                             <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
@@ -133,7 +110,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
+                        android:layout_margin="10dp"
                         app:startIconDrawable="@drawable/ic_calendar"
                         android:id="@+id/startDateL">
                         <com.google.android.material.textfield.TextInputEditText
@@ -146,7 +123,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
+                        android:layout_margin="10dp"
                         app:startIconDrawable="@drawable/ic_calendar"
                         android:id="@+id/returnDateL">
                         <com.google.android.material.textfield.TextInputEditText

@@ -6,7 +6,10 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,8 +67,16 @@ public class SignIn extends AppCompatActivity {
         TermsConditions = findViewById(R.id.termsConditions);
         TermsConditions.setMovementMethod(LinkMovementMethod.getInstance());
 
+        String value = "<html><font color=#757b86><b><a href=\"https://pages.flycricket.io/rentaride/terms.html\">Terms and Conditions</a></b></font> </html>";
+        Spannable spannedText = (Spannable)
+                Html.fromHtml(value);
+
+        Spannable processedText = removeUnderlines(spannedText);
+        TermsConditions.setText(processedText);
+
         createSignInRequest();
     }
+
 
     private void createSignInRequest() {
         // Configure sign-in to request the user's ID, email address, and basic  profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -118,5 +129,16 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+    }
+    public static Spannable removeUnderlines(Spannable p_Text) {
+        URLSpan[] spans = p_Text.getSpans(0, p_Text.length(), URLSpan.class);
+        for (URLSpan span : spans) {
+            int start = p_Text.getSpanStart(span);
+            int end = p_Text.getSpanEnd(span);
+            p_Text.removeSpan(span);
+            span = new URLSpanNoUnderline(span.getURL());
+            p_Text.setSpan(span, start, end, 0);
+        }
+        return p_Text;
     }
 }

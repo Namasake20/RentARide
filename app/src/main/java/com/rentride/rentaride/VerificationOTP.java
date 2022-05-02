@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
@@ -39,6 +40,7 @@ public class VerificationOTP extends AppCompatActivity {
     String generatedCode;
     MaterialButton btnCode;
     String action,phoneNumber;
+    TextView phoneDigit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,14 @@ public class VerificationOTP extends AppCompatActivity {
 
         pinView = findViewById(R.id.pinViewV);
         btnCode = findViewById(R.id.VerifyID);
+        phoneDigit = findViewById(R.id.simCode);
 
         String phone = getIntent().getStringExtra("phone_number");
+        String num = getIntent().getStringExtra("232");
 
         action = getIntent().getStringExtra("Action");
+        phoneDigit.setText("  ..."+num);
+
 
 
         btnCode.setOnClickListener(new View.OnClickListener() {

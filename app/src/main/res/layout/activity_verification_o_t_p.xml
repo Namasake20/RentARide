@@ -28,14 +28,28 @@
             android:textAllCaps="true"
             android:layout_gravity="center_horizontal"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/otp_description"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"
-            />
+            android:layout_gravity="center"
+            android:layout_marginStart="30dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/otp_description"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/simCode"
+                android:text="@string/_694"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
         <com.chaos.view.PinView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
